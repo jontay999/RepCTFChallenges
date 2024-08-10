@@ -20,10 +20,9 @@ def generateRelatedMessages():
     return large_msg, small_msg
 
 m1,m2 = generateRelatedMessages()
-
 def collectMultiplesOfModulus():
-    # p = remote('localhost', 1337)
-    p = remote('fun.chall.seetf.sg', 30004)
+    p = remote('localhost', 1001)
+    # p = remote('fun.chall.seetf.sg', 30004)
     # nc fun.chall.seetf.sg 30004
     p.recvuntil(b'(as integer) :')
     p.sendline(str(m1).encode('utf-8'))
@@ -44,7 +43,7 @@ modulus_multiples = [collectMultiplesOfModulus() for _ in range(4)]
 modulus = gcd(*modulus_multiples)
 print("Modulus found:", modulus)
 
-#Square root the modulus multiple times until flag is valid
+# Square root the modulus multiple times until flag is valid
 gmpy2.get_context().precision=3000 #this line is necessary to make sure no bytes are lost
 while True:
     flag = int(gmpy2.root(modulus,2))

@@ -1,7 +1,5 @@
 # Lost Modulus
 
-**Author**: coff33
-
 **Category**: Crypto
 
 [Solution](solve/solve.py)
@@ -16,7 +14,17 @@ Easy
 
 ## Deployment
 
-`docker-compose up -d`
+- Locally
+
+```
+docker build -t repctf-crypto-lost-modulus ./service/
+
+docker run -d -p 1001:1337 --name lost-modulus repctf-crypto-lost-modulus
+
+```
+
+- possibly for afterwards
+  `docker-compose up -d`
 
 ## Distributed Files
 

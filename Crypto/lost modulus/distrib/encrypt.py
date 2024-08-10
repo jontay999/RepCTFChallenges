@@ -5,13 +5,13 @@ with open("flag.txt", "rb") as f:
 
 n = bytes_to_long(FLAG)
 
-#make sure i have a big modulus
+# make sure my modulus is big!
 while n.bit_length() < 2048:
     n *= n
 
 def encrypt(m1, m2):
     e = getPrime(256)
-    assert m1.bit_length() >= 1600 and long_to_bytes(m1).startswith(b"SEE{"), 'first message must be at least 1600 bits and begin with "SEE{"'
+    assert m1.bit_length() >= 1600 and long_to_bytes(m1).startswith(b"REP{"), 'first message must be at least 1600 bits and begin with "REP{"'
     assert 500 <= m2.bit_length() <= 600, 'second message must be within 500 to 600 bits'
 
     return pow(m1, e, n), pow(m2, e, n)
