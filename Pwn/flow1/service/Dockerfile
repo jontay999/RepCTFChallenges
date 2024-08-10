@@ -16,6 +16,6 @@ RUN apt install -y socat
 
 USER test
 
-EXPOSE 2001
+EXPOSE 1337
 
-ENTRYPOINT socat tcp-l:2001,fork,reuseaddr exec:./run.sh
+ENTRYPOINT socat tcp-l:1337,fork,reuseaddr exec:./run.sh
