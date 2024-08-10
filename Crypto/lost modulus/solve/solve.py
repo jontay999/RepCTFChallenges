@@ -4,7 +4,7 @@ from math import gcd
 import gmpy2
 
 def generateRelatedMessages():
-    start = s2n(b"SEE{xxx") # add some x to give more padding for the cubic root
+    start = s2n(b"REP{xxx") # add some x to give more padding for the cubic root
     curr_bitlength = start.bit_length()
 
     # add 7 to give some padding, this number can be tweaked
@@ -14,7 +14,7 @@ def generateRelatedMessages():
 
 
     assert large_msg.bit_length() > 1600
-    assert n2s(large_msg).startswith(b'SEE{')
+    assert n2s(large_msg).startswith(b'REP{')
     assert 500 < small_msg.bit_length() <=600
 
     return large_msg, small_msg
@@ -22,8 +22,6 @@ def generateRelatedMessages():
 m1,m2 = generateRelatedMessages()
 def collectMultiplesOfModulus():
     p = remote('localhost', 1001)
-    # p = remote('fun.chall.seetf.sg', 30004)
-    # nc fun.chall.seetf.sg 30004
     p.recvuntil(b'(as integer) :')
     p.sendline(str(m1).encode('utf-8'))
     p.recvuntil(b'(as integer) :')
