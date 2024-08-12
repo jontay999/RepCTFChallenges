@@ -2,7 +2,7 @@ from tqdm import tqdm
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad,unpad
 from itertools import product
-encrypted_flag = open('../service/encrypted.txt', 'rb').read().strip()
+encrypted_flag = open('./encrypted.txt', 'rb').read().strip()
 
 def check_key(possible_key):
     key = pad(possible_key, 16)
