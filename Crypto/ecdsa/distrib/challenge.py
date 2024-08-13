@@ -1,13 +1,8 @@
-# Elliptic Curve equations work by
-# y^2 = x^3 + a * x + b mod N
-
 import random 
 from ecdsa import curves
 from hashlib import sha256
-from Crypto.Cipher import AES
-from random import randbytes
-
-# https://strm.sh/studies/bitcoin-nonce-reuse-attack/
+from random import getrandbits
+from libnum import s2n
 
 class Ecdsa:
     # Bitcoin's curve should be secure right?
@@ -24,7 +19,7 @@ class Ecdsa:
         hash = int(sha256(msg).hexdigest(),16)
         r = (self.k * self.g).x() % self.n
         s = (hash + r * self.d) * pow(self.k, -1, self.n) % self.n
-        return r,s
+        return int(r),int(s)
     
     def verify(self, msg, sig):
          hash = int(sha256(msg).hexdigest(),16)
@@ -34,19 +29,26 @@ class Ecdsa:
          test_r = (u1 * self.g + u2 * self.q).x() % self.n 
          return test_r == r
 
+def encrypt_flag(secret_key):
+    random.seed(secret_key)
+    flag = b"REP{FAKE_FLAG}"
+    otp = random.randbytes(len(flag))
+    encrypted = bytes([b1 ^ b2 for b1, b2 in zip(flag,otp)])
+    return s2n(encrypted)
+
+
 if __name__ == "__main__":
-    secret_key = randbytes(254)
-    msg1 = b"Did you know that Bitcoin uses ECDSA?"
+    secret_key = getrandbits(254)
+    msg = b"Did you know that Bitcoin uses ECDSA? I wonder if I can break into any Bitcoin wallets..."
+    half_length = len(msg)//2
+    msg1, msg2 = msg[:half_length], msg[half_length:]
     ecdsa = Ecdsa(secret_key)
-    sig = ecdsa.sign(msg1)
-    assert ecdsa.verify(msg1, sig)
+    sig1 = ecdsa.sign(msg1)
+    assert ecdsa.verify(msg1, sig1)
+    sig2 = ecdsa.sign(msg2)
+    assert ecdsa.verify(msg2, sig2)
+    enc = encrypt_flag(secret_key)
+    print(f"sig1 = {sig1}")
+    print(f"sig2 = {sig2}")
+    print(f"enc = {enc}")
 
-
-
-
-# Generate a cryptographically secure random number k between 1 and n-1.
-# Important: Do not reuse k after a signature is made with it because there are flaws that enable an attacker to derive private keys from signed messages if they know the shared nonce k used in them.
-
-# Compute (x, y) = k*G, where G is the generator point of the secp256k1 curve, which is 04 79BE667E F9DCBBAC 55A06295 CE870B07 029BFCDB 2DCE28D9 59F2815B 16F81798 483ADA77 26A3C465 5DA4FBFC 0E1108A8 FD17B448 A6855419 9C47D08F FB10D4B8 in uncompressed form, however the compressed form can also be used.
-# Compute r = x mod n. If r=0, generate another random k and start over.
-# Compute s = k-1(z + r*dA) mod n. If s=0, generate another random k and start over.
