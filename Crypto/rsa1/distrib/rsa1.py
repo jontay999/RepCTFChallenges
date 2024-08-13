@@ -2,7 +2,7 @@ from libnum import s2n
 from sympy import nextprime
 from Crypto.Util.number import getPrime
 
-flag = b"REP{close_primes_are_bad_0c566079d50e4af68facf90b87c26676}"
+flag = b"REP{FAKE_FLAG}"
 p = getPrime(1024)
 q = nextprime(p)
 print(p,q)

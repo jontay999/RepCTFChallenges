@@ -17,3 +17,4 @@ d = pow(e,-1,phi)
 m = pow(ct,d,n)
 flag = n2s(m)
 print(flag)
+# REP{close_primes_are_bad_0c566079d50e4af68facf90b87c26676}
