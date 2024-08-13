@@ -1,7 +1,7 @@
 
 from random import getrandbits
 
-flag = "REP{mersenne_twister_is_bad_for_encryption}"
+flag = "REP{FAKE_FLAG}"
 output = []
 # Here's some random output
 for _ in range(620):
