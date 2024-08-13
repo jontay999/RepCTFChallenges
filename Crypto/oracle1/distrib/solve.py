@@ -1,20 +1,21 @@
 from pwn import *
-
-p = remote("127.0.0.1", 8000)
+from string import printable
+p = remote("localhost", 1002)
 
 p.recvuntil(b"crack it if you can: ")
 cipher = p.recvline().strip().decode('utf-8')
+print("got cipher:", cipher)
 blocks = [cipher[i:i+32] for i in range(0,len(cipher),32)]
 padding_good = "That was nice!"
 padding_bad = "That wasn't so nice..."
 
 alphabet = "0123456789abcdefghijklmnopqrstuvwxyzREP{}_"
+alphabet = printable
 def is_padding_wrong(payload):
     p.sendlineafter(b">", b"1")
-    p.sendlineafter(b"hex):", payload.encode('utf-8'))
-    p.recvuntil(b":")
+    p.sendlineafter(b"Encrypted text in hex (e.g. 3a1f): ", payload.encode('utf-8'))
+    p.recvuntil(b"Here's your decryption: ")
     msg = p.recvline().strip().decode('utf-8')
-    print("payload:", payload)
     return msg == padding_bad
 
 def find_char(first_block, second_block, padding):
@@ -41,10 +42,12 @@ def find_char(first_block, second_block, padding):
                 flag_block = i + flag_block
                 padding += 1
 
+
                 modified_block = testing_block
                 for i in range(padding):
                     modified_block[-i-1] ^= ((padding+1) ^ (padding))
                 if padding > 16: return flag_block
+                print("block:", flag_block)
                 break
 
     print(flag_block)
