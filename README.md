@@ -167,3 +167,7 @@ docker run -d --name my-container-name my-image-name
 5. Blockchain1
 
 6. Blockchain2
+
+7. Hash tables
+
+- slow down an operation based on primes
