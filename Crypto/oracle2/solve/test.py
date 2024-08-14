@@ -25,6 +25,7 @@ class Oracle:
         # return pow(query_c, self.d, self.n)
 
 oracle = Oracle()
+
 k = 63
 B = 2 ** ( 8 * (k - 1))
 def more_than_b(i):
@@ -87,3 +88,6 @@ while mmax - mmin > 0:
 
 print(f"tries: {tries}")
 print(n2s(mmin))
+
+
+# REP{well_done_honestly_wasn't_expecting_anyone_to_get_this}
