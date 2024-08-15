@@ -8,6 +8,8 @@ void flow() {
 }
 
 int main() {
+    setbuf(stdout,0);
+    setbuf(stdin,0);
     puts("Welcome to pwn103, now with NX enabled");
     flow();
 }

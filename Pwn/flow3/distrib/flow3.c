@@ -1,5 +1,5 @@
-
 #include <stdio.h>
+#include <stdlib.h>
 
 void flow() {
     char buffer[40];
@@ -8,7 +8,9 @@ void flow() {
 }
 
 int main() {
-    puts("Welcome to pwn102, essentially the same challenge with a lil twist");
+    setbuf(stdout,0);
+    setbuf(stdin,0);
+    puts("Welcome to pwn103, now with NX enabled");
     flow();
 }
 
