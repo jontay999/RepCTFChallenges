@@ -17,11 +17,9 @@ db.serialize(() => {
     db.run("INSERT INTO users (username, password) VALUES (?, ?)", ["user", "password"]);
 });
 
-// /login endpoint
+
 app.post('/login', (req, res) => {
-    console.log("hit the endpoint")
     const { username, password } = req.body;
-    console.log(username, password)
 
     if (!username || !password) {
         return res.status(400).json({ error: "Username and password are required" });
@@ -35,10 +33,8 @@ app.post('/login', (req, res) => {
 
         if (row) {
             if (username == "admin") {
-                console.log("here")
                 return res.send(`WELCOME ADMIN, HERE'S THE FLAG ${flag}`)
             } else {
-                console.log("there")
                 return res.send(`You logged in as ${username}...`)
             }
         } else {
