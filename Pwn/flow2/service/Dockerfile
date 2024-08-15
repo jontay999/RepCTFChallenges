@@ -1,21 +1,6 @@
-FROM ubuntu:22.04
+# this is default bound to port 5000
+FROM pwn.red/jail
 
-RUN useradd -m test
-
-WORKDIR /home/test
-
-COPY flow2 .
-COPY flag.txt .
-COPY run.sh .
-
-RUN chmod 555 run.sh
-RUN chmod 555 flow2
-RUN chmod +r flag.txt
-RUN apt update
-RUN apt install -y socat
-
-USER test
-
-EXPOSE 1337
-
-ENTRYPOINT socat tcp-l:1337,fork,reuseaddr exec:./run.sh
+COPY --from=ubuntu:22.04 / /srv
+COPY --chmod=755 flow2 /srv/app/run
+COPY flag.txt /srv/app/flag.txt
