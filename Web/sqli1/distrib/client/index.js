@@ -1,3 +1,4 @@
+const SERVER_URL = "http://127.0.0.1:3000"
 function fancy_schmancy_effect() {
     const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     let interval = null;
@@ -27,17 +28,22 @@ function fancy_schmancy_effect() {
 
 document.addEventListener('DOMContentLoaded', () => {
     fancy_schmancy_effect()
-
-
-
-    document.getElementById("form").addEventListener('submit', e => {
+    document.getElementById("form").addEventListener('submit', async (e) => {
         e.preventDefault()
         const { username, password } = e.target
-        const data = {
+        const data = JSON.stringify({
             username: username.value,
             password: password.value
-        }
-        alert(username.value + password.value)
+        })
+        const response = await fetch(SERVER_URL + "/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: data
+        })
+        const response_text = await response.text()
+        alert(response_text)
     })
 
 });
