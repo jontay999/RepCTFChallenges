@@ -26,8 +26,18 @@ function fancy_schmancy_effect() {
     }
 }
 
+
+const toggle_show_password = (toggler, elements) => {
+    toggler.addEventListener('change', e => {
+        elements.forEach(element => {
+            element.setAttribute('type', e.target.checked ? 'text' : 'password');
+        });
+    });
+};
+
 document.addEventListener('DOMContentLoaded', () => {
     fancy_schmancy_effect()
+    toggle_show_password(form.showPassword, [form.password]);
     document.getElementById("form").addEventListener('submit', async (e) => {
         e.preventDefault()
         const { username, password } = e.target
