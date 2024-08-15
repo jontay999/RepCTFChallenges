@@ -49,62 +49,46 @@ docker run -d --name my-container-name my-image-name
 - send 2 plaintexts that are multiples of each other (cube)
 - construct the equation and root it
 
-6. `rsa4` (hard)
+6. `rsa4` (hard) (done)
 
-- coppersmith's
+- use groebner basis to solve polynonmial equations
 
-7. `random1` (easy) (in progress)
+7. `random1` (easy) (done)
 
 - give 620 outputs, remaining 4 outputs can be derived from the flag
 - derive mersenne twister
 - xor the flag
 
-8. `random2` (hard) (not started)
-
-- break python3's random best on partial outputs
-- guess lottery numbers
-
-9. `ecc` (medium)
-
-- psychic signatures
-
-10. `ecdsa` (medium)
+8. `ecdsa` (medium) (done)
 
 - nonce reuse
 
-11. `lll` (hard)
-
-- use LLL
-
-12. `AES-galore` (hard)
-
-- all basic problems of variants of AES
-
-13. `oracle1` (hard)
+9. `oracle1` (hard) (done)
 
 - CBC padding oracle
 
-14. `oracle2` (hard)
+10. `oracle2` (hard) (done)
 
 - manger's attack
 
 ### Pwn
 
-1. `flow1` (easy) (completed)
+1. `flow1` (easy) (done)
 
 - buffer overflow, ret2win
 
-2. `flow2` (easy) (completed)
+2. `flow2` (easy) (done)
 
 - shellcode
 
-3. `flow3` (easy)
+3. `flow3` (easy) (done)
 
-- integer underflow/overflow
+- ret2win but use ROP to call function
 
 4. `flow4` (medium)
 
-- ROP programming
+- integer underflow to leak canary
+- ROP chain to shell?
 
 5. `format1` (medium)
 
@@ -120,17 +104,24 @@ docker run -d --name my-container-name my-image-name
 
 ### Web
 
-1. XSS
+1. SQL Injection
 
-2. SSRF
+- admin login screen
+- basic xss sql
 
-3. Markdown Injection
+2. XSS
 
-4. Dom-clobbering
+3. SSRF
 
-5. React stuff
+4. Markdown Injection
 
-6. XS-leaks
+5. Dom-clobbering
+
+6. React stuff
+
+7. XS-leaks
+
+8. Prototype pollution
 
 ### RE
 
