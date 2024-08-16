@@ -5,6 +5,8 @@
 int secret_code = 1;
 
 int main() {
+    setbuf(stdout,0);
+    setbuf(stdin,0);
     char buffer[40];
     puts("I've learnt my lesson, no more buffer overflows for you...");
     puts("Instead, I'll just let you print some things out, surely that won't be bad right?");
