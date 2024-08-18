@@ -85,22 +85,30 @@ docker run -d --name my-container-name my-image-name
 
 - ret2win but use ROP to call function
 
-4. `flow4` (medium)
+4. `fmt1` (easy) (done)
 
-- integer underflow to leak canary
-- ROP chain to shell?
+- use format string vulnerability to overwrite an addres
 
-5. `format1` (medium)
+5. `fmt2` (medium) (done)
 
-- format string to leak canary
-- do a libc leak
-- then ret2win
+- integer underflow to leak libc address to find libc base address with ASLR
+- overwrite got table of printf to point to system
 
-6. `heap1` (hard)
+6. `heap1` (medium)
 
-7. `kernel1` (hard)
+- classic use after free
 
-8. `browser1` (hard)
+7. `heap2` (hard)
+
+- tcache poisoning? or one of the house-of-
+
+8. `kernel1` (hard)
+
+- need to check how to set up the `.ko` file
+
+9. `browser1` (hard)
+
+- unlikely to be done
 
 ### Web
 
