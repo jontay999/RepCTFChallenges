@@ -1,14 +1,11 @@
 const express = require('express');
+const path = require('path');
 const bodyParser = require('body-parser');
 const sqlite3 = require('sqlite3').verbose();
-const cors = require('cors');
 const app = express();
-app.use(cors({
-    origin: 'http://127.0.0.1:5500'
-}));
 
 const db = new sqlite3.Database(':memory:');
-let flag = "REP{y0ur_f1r5t_5ql_1nj3ct10n_well_done!!!}"
+let flag = process.env.FLAG
 app.use(bodyParser.json());
 
 db.serialize(() => {
@@ -17,6 +14,10 @@ db.serialize(() => {
     db.run("INSERT INTO users (username, password) VALUES (?, ?)", ["user", "password"]);
 });
 
+app.use(express.static(path.join(__dirname, 'public')));
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
@@ -42,7 +43,6 @@ app.post('/login', (req, res) => {
         }
     });
 });
-
 const PORT = 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

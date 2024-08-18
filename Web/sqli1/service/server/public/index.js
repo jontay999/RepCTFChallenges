@@ -1,4 +1,3 @@
-const SERVER_URL = "http://127.0.0.1:3000"
 function fancy_schmancy_effect() {
     const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     let interval = null;
@@ -26,7 +25,6 @@ function fancy_schmancy_effect() {
     }
 }
 
-
 const toggle_show_password = (toggler, elements) => {
     toggler.addEventListener('change', e => {
         elements.forEach(element => {
@@ -45,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
             username: username.value,
             password: password.value
         })
-        const response = await fetch(SERVER_URL + "/login", {
+        const response = await fetch("/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -55,5 +53,4 @@ document.addEventListener('DOMContentLoaded', () => {
         const response_text = await response.text()
         alert(response_text)
     })
-
 });
