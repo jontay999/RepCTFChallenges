@@ -1,10 +1,9 @@
 ```
 docker build -t repctf-pwn-5 .
 docker run -d -p 2005:5000 --name pwn-fmt-2 --privileged repctf-pwn-5
-
 ```
 
-IMPT TO DISABLE ASLR
+NOTE THAT ASLR IS TURNED ON FOR THIS CHALLENGE
 
 ```
 docker exec -it pwn-fmt-2 sh
