@@ -6,11 +6,12 @@ const app = express();
 
 const db = new sqlite3.Database(':memory:');
 let flag = process.env.FLAG
+let admin_password = process.env.ADMIN_PASSWORD
 app.use(bodyParser.json());
 
 db.serialize(() => {
     db.run("CREATE TABLE users (username TEXT, password TEXT)");
-    db.run("INSERT INTO users (username, password) VALUES (?, ?)", ["admin", "password123"]);
+    db.run("INSERT INTO users (username, password) VALUES (?, ?)", ["admin", admin_password]);
     db.run("INSERT INTO users (username, password) VALUES (?, ?)", ["user", "password"]);
 });
 
@@ -22,15 +23,11 @@ app.get('/', (req, res) => {
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
 
-    if (!username || !password) {
-        return res.status(400).json({ error: "Username and password are required" });
-    }
+    if (!username || !password) return res.status(400).json({ error: "Username and password are required" });
 
     const query = `SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`;
     db.get(query, (err, row) => {
-        if (err) {
-            return res.status(500).send("Database error");
-        }
+        if (err) return res.status(500).send("Database error");
 
         if (row) {
             if (username == "admin") {
@@ -43,6 +40,7 @@ app.post('/login', (req, res) => {
         }
     });
 });
+
 const PORT = 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
