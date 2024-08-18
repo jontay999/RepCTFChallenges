@@ -27,7 +27,6 @@ void hint(){
 
 void fmt2(){
   setbuf(stdin,0);
-  setbuf(stdout,0);
   char buffer[100];
   puts("no more buffer overflows...");
   fgets(buffer, sizeof(buffer), stdin);
@@ -40,6 +39,8 @@ void fmt2(){
 }
 
 int main(){
+  setbuf(stdin,0);
+  setbuf(stdout,0);
   hint();
   fmt2();
 }

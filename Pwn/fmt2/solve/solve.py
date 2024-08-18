@@ -1,6 +1,6 @@
 from pwn import *
 
-binary = "./real"
+binary = "./fmt2"
 context.binary = binary
 elf = ELF(binary)
 libc = ELF('./libc.so.6')
