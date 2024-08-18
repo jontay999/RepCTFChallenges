@@ -7,5 +7,8 @@ NOTE THAT ASLR IS TURNED ON FOR THIS CHALLENGE
 
 ```
 docker exec -it pwn-fmt-2 sh
-echo 0 | tee /proc/sys/kernel/randomize_va_space
+docker logs pwn-fmt-2
+
+// need to copy the libc used here to serve
+docker cp 11e9471bd61b:/srv/lib/x86_64-linux-gnu/libc.so.6 .
 ```

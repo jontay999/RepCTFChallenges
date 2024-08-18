@@ -3,4 +3,4 @@ FROM pwn.red/jail
 
 COPY --from=ubuntu:22.04 / /srv
 COPY --chmod=755 fmt2 /srv/app/run
-COPY flag.txt /srv/app/flag.txt
+COPY --chmod=744 flag.txt /srv/app/flag.txt
