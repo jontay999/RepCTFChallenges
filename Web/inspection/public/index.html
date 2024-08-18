@@ -1,0 +1,58 @@
+<head>
+  <meta charset="utf-8" />
+  <title>Rock Paper Scissors</title>
+  <link rel="stylesheet" href="index.css" />
+  <!-- Back in the day when I first learnt coding, this was my first project heh -->
+  <!-- all thanks to FreeCodeCamp -->
+  <!-- https://www.youtube.com/watch?v=jaVNP3nIAv0 -->
+  <!-- https://codepen.io/jontay999/pen/MxEENN -->
+  <!-- ANYWAY here's the first part of the flag, there's 3 more parts scattered around the codebase -->
+  <!-- FLAG PART 1: REP{th3_f1r5t_5t3p_ -->
+</head>
+<body>
+  <header>
+    <h1>Rock Paper Scissors</h1>
+  </header>
+
+  <div class="score-board">
+    <div id="user-label" class="badge">USER</div>
+    <div id="comp-label" class="badge">COMP</div>
+    <span id="user-score">0</span> : <span id="comp-score">0</span>
+  </div>
+
+  <div class="result">
+    <p></p>
+  </div>
+
+  <div class="choices">
+    <div class="choice" id="s">
+      <img
+        src="https://cdn2.iconfinder.com/data/icons/font-awesome/1792/hand-scissors-o-512.png"
+        height="60"
+        width="60"
+      />
+    </div>
+    <div class="choice" id="p">
+      <img
+        src="https://png.pngtree.com/svg/20170330/79f391198b.svg"
+        height="60"
+        width="60"
+      />
+    </div>
+    <div
+      class="choice"
+      id="r"
+      data-flag="don't just skim over the html, it can contain some interesting things, here's part2 of the flag: t0_s0lv1ng_w3b_cH4ll3ng3s_ "
+    >
+      <img
+        src="https://toppng.com/uploads/preview/rock-png-115279396407llilmp7es.png"
+        height="60"
+        width="60"
+      />
+    </div>
+  </div>
+
+  <p id="action-message">Make your move.</p>
+  <script src="index.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lz-string@1.5.0/libs/lz-string.min.js"></script>
+</body>
