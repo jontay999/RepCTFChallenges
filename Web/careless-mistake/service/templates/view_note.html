@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>View Note</title>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #f0f2f5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .note-container {
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        width: 100%;
+        border: 1px solid #e1e4e8;
+      }
+
+      .note-header {
+        font-size: 28px;
+        color: #333;
+        margin-bottom: 20px;
+        text-align: center;
+        font-weight: 600;
+      }
+
+      .note-content {
+        font-size: 18px;
+        color: #444;
+        line-height: 1.7;
+        white-space: pre-wrap; /* Ensures new lines are respected */
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #fafafa;
+        overflow-wrap: break-word; /* Handles long words */
+      }
+
+      .note-footer {
+        margin-top: 30px;
+        text-align: center;
+      }
+
+      .note-footer a {
+        text-decoration: none;
+        color: #007bff;
+        font-weight: bold;
+        padding: 10px 15px;
+        border-radius: 5px;
+        background-color: #eaf2ff;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      .note-footer a:hover {
+        background-color: #007bff;
+        color: #ffffff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="note-container">
+      <div class="note-header">Your Note</div>
+      <div class="note-content">{{ note_content }}</div>
+      <div class="note-footer">
+        <a href="{{ url_for('index') }}">Back to Home</a>
+      </div>
+    </div>
+  </body>
+</html>

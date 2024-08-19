@@ -1,15 +1,17 @@
-from flask import Flask, request, redirect, url_for, render_template_string
+from flask import Flask, request, redirect, url_for, render_template_string, render_template
 import hmac
 import hashlib
 import os
 import uuid
 
 app = Flask(__name__)
+app.secret_key = os.getenv('FLASK_KEY')
 
 class Database:
     def __init__(self):
         self.notes = []
-        self.secret = f"secret-{uuid.uuid4()}"
+        # My secret doesnt have to be too long, just 30 random bytes...
+        self.secret = f"secret-{uuid.uuid4}"[:30]
 
     def create_note(self, data):
         note_id = len(self.notes)
@@ -26,6 +28,7 @@ class Database:
             return {'error': 'note not found'}
         return {'data': self.notes[note_id]}
 
+    
     def generate_token(self, note_id):
         return hmac.new(
             self.secret.encode(),
@@ -34,32 +37,32 @@ class Database:
         ).hexdigest()
 
 db = Database()
-db.create_note(data=os.environ.get('FLAG', 'DEFAULT_FLAG'))
+db.create_note(data=os.environ.get('FLAG', 'REP{fake_flag}'))
 
 @app.route('/create', methods=['POST'])
 def create():
-    data = request.form.get('data', 'no data provided.')
+    data = request.form.get('data')
     result = db.create_note(data=data)
     return redirect(url_for('note', id=result['id'], token=result['token']))
 
 @app.route('/note')
 def note():
-    note_id = int(request.args.get('id', -1))
-    token = request.args.get('token', '')
-    note = db.get_note(note_id=note_id, token=token)
-    if 'error' in note:
-        return note['error']
-    else:
-        return note['data']
+    try:
+        note_id = int(request.args.get('id'))
+        token = request.args.get('token')
+        note = db.get_note(note_id=note_id, token=token)
+        if 'error' in note:
+            return note['error']
+        else:
+            return render_template('view_note.html', note_content = note["data"])
+    except: 
+        return "`note_id` must be an integer and `token` must be provided"
+
 
 @app.route('/')
 def index():
-    return render_template_string('''
-        <form action="{{ url_for('create') }}" method="POST">
-            <textarea name="data" rows="4" cols="50">Enter your note here...</textarea><br>
-            <input type="submit" value="Create Note">
-        </form>
-    ''')
+    return render_template('index.html')
+
 
 if __name__ == '__main__':
-    app.run(port=3000)
+    app.run( port = 3000)
