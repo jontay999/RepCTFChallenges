@@ -11,8 +11,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@fastify/rate-limit": "^9.1.0",
     "@fastify/static": "^7.0.4",
-    "fastify": "^4.28.1"
+    "fastify": "^4.28.1",
+    "puppeteer": "^23.1.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.4"
