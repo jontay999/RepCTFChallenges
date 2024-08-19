@@ -37,13 +37,14 @@ const port = 3000;
     const verify_answers = async (answers) => {
         const query_param = new URLSearchParams(answers).toString();
         const base_url = `http://localhost:${port}`
-        console.log("visiting url:", url)
+        console.log("visiting url:", base_url)
         const ctx = await browser.createBrowserContext()
         const page = await ctx.newPage()
         await page.goto(base_url, { timeout: 5000, waitUntil: 'networkidle2' })
         await page.setCookie(...cookies);
         try {
             const url_with_answers = `http://localhost:${port}?${query_param}`
+            console.log("visiting url with answers:", url_with_answers)
             await page.goto(url_with_answers, { timeout: 5000, waitUntil: 'networkidle2' })
             await page.waitForSelector('textarea')
         } finally {

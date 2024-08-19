@@ -9,7 +9,10 @@ function read_query_params() {
     const params = new URLSearchParams(window.location.search)
     params.forEach((value, key) => {
         if (key === open_ended) {
-            document.getElementById(open_ended).value = value
+            const textarea = document.getElementById(open_ended)
+            const div = document.createElement('div');
+            div.innerHTML = value;
+
         } else if (question_keys.includes(key) && valid_values.includes(value)) {
             document.querySelector(`input[name="${key}"][value="${value}"]`).checked = true;
         };
