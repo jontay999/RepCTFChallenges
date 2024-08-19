@@ -10,8 +10,8 @@ app.secret_key = os.getenv('FLASK_KEY')
 class Database:
     def __init__(self):
         self.notes = []
-        # My secret doesnt have to be too long, just 30 random bytes...
-        self.secret = f"secret-{uuid.uuid4}"[:30]
+        # My secret doesnt have to be too long, just 32 random bytes...
+        self.secret = f"secret-key-{uuid.uuid4}"[:32]
 
     def create_note(self, data):
         note_id = len(self.notes)
