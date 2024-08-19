@@ -4,7 +4,7 @@ import hashlib
 import uuid
 
 
-address = "http://127.0.0.1:3000/note"
+address = "http://localhost:3002/note"
 secret = f"secret-key-{uuid.uuid4}"[:32]
 note_id = 0
 token = hmac.new(
