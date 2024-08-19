@@ -1,0 +1,65 @@
+<header>
+  <h1>TRAT Quiz</h1>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"
+  />
+  <link rel="stylesheet" href="index.css" />
+</header>
+<div id="emc-score"></div>
+<div class="wrap">
+  <div class="row">
+    <section data-quiz-item>
+      <div class="question">
+        <code><b>MATH: </b></code>
+        Triple integrals are superior to triple differentials.
+      </div>
+      <div class="choices" data-choices="True,False"></div>
+    </section>
+    <section data-quiz-item>
+      <div class="question">
+        <code><b>Chemical Engineering:</b></code>
+        To achieve the same conversion, mathematically, CSTR will always require
+        a larger V than PFTR.
+      </div>
+      <div class="choices" data-choices="True,False"></div>
+    </section>
+  </div>
+  <div class="row last">
+    <section data-quiz-item>
+      <div class="question">
+        <code>EEE:</code>
+        For a 4-bit binary, the signed range of a 1's complement representation
+        is <code>[-7,7]</code>
+      </div>
+      <div class="choices" data-choices="True,False"></div>
+    </section>
+    <section data-quiz-item>
+      <div class="question">
+        <code>Materials Engineering:</code>
+        What are Binary-Eutectic systems and explain with an example Eutectic
+        reaction?
+      </div>
+      <div class="user-input">
+        <textarea placeholder="Your answer here" rows="1"></textarea>
+      </div>
+    </section>
+  </div>
+  <div class="submit">
+    <button id="emc-submit">Submit Answers</button>
+  </div>
+</div>
+
+<footer>
+  <div id="emc-progress"></div>
+</footer>
+<div class="attrib">
+  <p>
+    HTML Code adapted from <i class="fa fa-long-arrow-right"></i>
+    <a href="https://codepen.io/cmcg/pen/mdBzaM" target="_blank"
+      >https://codepen.io/cmcg/pen/mdBzaM</a
+    >
+  </p>
+</div>
+
+<script src="index.js"></script>
