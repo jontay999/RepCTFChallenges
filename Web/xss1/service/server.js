@@ -6,6 +6,18 @@ fastify.register(require('@fastify/static'), {
     prefix: '/',
 });
 
+
+fastify.post('/submit', async (request, reply) => {
+    try {
+        const answers = request.body;
+        console.log('Received answers:', answers);
+        reply.send({ status: 'success', data: answers });
+    } catch (error) {
+        console.error('Error:', error);
+        reply.status(500).send({ status: 'error', message: 'Internal Server Error' });
+    }
+});
+
 fastify.get('/', (req, reply) => {
     reply.sendFile('index.html');
 });

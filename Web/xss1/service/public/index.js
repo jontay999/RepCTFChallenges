@@ -1,77 +1,26 @@
-(function () {
-    function emc(settings) {
-        let quizItems = document.querySelectorAll('[data-quiz-item]');
-        let choices = document.querySelectorAll('[data-choices]');
-        let itemCount = quizItems.length;
-        let chosen = [];
-
-        emcInit();
-
-        function emcInit() {
-            quizItems.forEach(function (item, index) {
-                console.log(item, index)
-                let choiceEl = item.querySelector('.choices');
-                let choicesData = choiceEl.dataset.choices.split(',');
-                choicesData.forEach(function (choice, i) {
-                    let option = document.createElement('input');
-                    option.name = index;
-                    option.id = index + '_' + i;
-                    option.type = 'radio';
-
-                    let label = document.createElement('label');
-                    label.htmlFor = index + '_' + i;
-                    label.textContent = choice;
-
-                    choiceEl.appendChild(option);
-                    choiceEl.appendChild(label);
-
-                    option.addEventListener('change', getChosen);
-                });
-            });
-        }
-
-        function getChosen() {
-            chosen = [];
-            choices.forEach(function (choiceGroup) {
-                let inputs = choiceGroup.querySelectorAll('input[type="radio"]');
-                inputs.forEach(function (input, index) {
-                    if (input.checked) {
-                        chosen.push(index + 1);
-                    }
-                });
-            });
-
-        }
-        function scoreNormal() {
-            let wrong = [];
-            let scoreEl = document.getElementById('emc-score');
-            quizItems.forEach(function (item, index) {
-                if (chosen[index] != settings.key[index]) {
-                    wrong.push(index);
-                }
-            });
-
-            quizItems.forEach(function (item, index) {
-                if (wrong.includes(index)) {
-                    item.classList.remove('item-correct');
-                    item.classList.add('item-incorrect');
-                } else {
-                    item.classList.remove('item-incorrect');
-                    item.classList.add('item-correct');
-                }
-            });
-
-            let score = ((itemCount - wrong.length) / itemCount).toFixed(2) * 100 + "%";
-            scoreEl.textContent = "You scored a " + score;
-            scoreEl.classList.add('new-score');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+const submit_form = () => {
+    const answers = {}
+    for (let i = 0; i < 3; i++) {
+        answers[i] = document.querySelector(`input[name="${i}"]:checked`)?.value;
     }
+    answers[3] = document.querySelector('textarea').value
+    const query_string = new URLSearchParams(answers).toString();
+    console.log(query_string)
+    alert(query_string)
 
-    // Initialize the quiz
-    document.addEventListener('DOMContentLoaded', function () {
-        emc({
-            key: ["2", "1", "2", "2", "2", "2", "1", "1"]
-        });
-    });
-})();
+    fetch('/submit', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(answers)
+    })
+        .then(response => response.json())
+        .then(data => console.log('Success:', data))
+        .catch(error => console.error('Error:', error));
+}
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById("emc-submit").addEventListener('click', submit_form)
+});
