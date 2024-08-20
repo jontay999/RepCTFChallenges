@@ -57,15 +57,20 @@ const port = 3000;
         console.log("just happily submitting")
         try {
             const answers = request.body;
-            // no need to await because I will run this job asynchronously
+            // reply.send({ message: "Answers submitted! I'll get an admin to check those answers soon..." });
+            const queryParams = new URLSearchParams(answers).toString();
+            console.log("hello")
+            reply.redirect(`/answers?${queryParams}`);
             // verify_answers(answers)
-            reply.send({ message: "Answers submitted! I'll get an admin to check those answers soon..." });
-            console.log("can stuff still go on here?")
-            verify_answers(answers)
         } catch (error) {
             console.error('Error:', error);
             reply.status(500).send({ status: 'error', message: 'Internal Server Error' });
         }
+    });
+
+    fastify.get('/answers', (request, reply) => {
+        const answers = request.query;
+        reply.send(answers);
     });
 
     fastify.get('/', {

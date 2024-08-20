@@ -4,20 +4,21 @@ const open_ended = "materials_eng"
 
 
 // If the query parameters are set, fill in the form.
-function read_query_params() {
-    valid_values = ["true", "false"]
-    const params = new URLSearchParams(window.location.search)
-    params.forEach((value, key) => {
-        if (key === open_ended) {
-            const textarea = document.getElementById(open_ended)
-            const div = document.createElement('div');
-            div.innerHTML = value;
+// function read_query_params() {
+//     const params = new URLSearchParams(window.location.search)
+//     console.log("params:", params)
+//     valid_values = ["true", "false"]
 
-        } else if (question_keys.includes(key) && valid_values.includes(value)) {
-            document.querySelector(`input[name="${key}"][value="${value}"]`).checked = true;
-        };
-    });
-}
+//     params.forEach((value, key) => {
+//         if (key === open_ended) {
+//             const div = document.createElement('div');
+//             div.innerHTML = value;
+
+//         } else if (question_keys.includes(key) && valid_values.includes(value)) {
+//             document.querySelector(`input[name="${key}"][value="${value}"]`).checked = true;
+//         };
+//     });
+// }
 
 const submit_form = () => {
     const answers = {}
@@ -32,13 +33,21 @@ const submit_form = () => {
         },
         body: JSON.stringify(answers)
     })
-        .then(response => response.json())
-        .then(data => alert(JSON.stringify(data)))
+        .then(response => {
+            if (response.redirected) {
+                alert("Answers submitted! I'll get an admin to check those answers soon...")
+                window.location.href = response.url;
+            }
+        })
         .catch(error => console.error('Error:', error));
 }
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    read_query_params()
-    document.getElementById("emc-submit").addEventListener('click', submit_form)
+    // read_query_params()
+    document.getElementById("form").addEventListener('submit', async (e) => {
+        e.preventDefault();
+        submit_form();
+    })
+    // document.getElementById("emc-submit").addEventListener('click', submit_form)
 });
