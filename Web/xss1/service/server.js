@@ -7,16 +7,12 @@ fastify.register(require('@fastify/static'), {
     prefix: '/',
 });
 
-// This variable will be initialised later
-// I dont want to keep launching new puppeteer instances so everyone will share this instance
 let browser;
 const port = 3000;
 
-
-// Since each request to /submit launches my admin bot which is a bit expensive
-// I limit requests to max 3 per minute on the /submit route per IP address
+// Apply a rate limit of 3/min per IP for /submit as it  launches my admin bot which is a bit expensive
 const rateLimit = {
-    max: 5,
+    max: 3,
     timeWindow: '1 minute',
     allowList: [],
     onExceeded: function (request, key) {
@@ -25,13 +21,11 @@ const rateLimit = {
 };
 
 (async () => {
-    await fastify.register(require('@fastify/rate-limit'), {
-        global: false
-    })
+    await fastify.register(require('@fastify/rate-limit'), { global: false })
 
-    // Well technically I could verify them here but where's the fun in that
-    // let me launch a bot that can visit my own website to see if the answers are posted nicely there
-    // before all that, let me hide my cookie inside
+    // I'll launch an admin bot that checks the answers at /answers?
+    // before all that, let me hide the flag in my cookie inside
+    // see if you can get the cookie from my bot!
     const cookies = [{
         'name': 'flag',
         'value': process.env.FLAG || "REP{FAKE_FLAG}"
@@ -45,10 +39,7 @@ const rateLimit = {
         await page.setCookie(...cookies);
         try {
             const url_with_answers = `${base_url}/answers?${query_param}`
-            console.log("visiting url with answers:", url_with_answers)
             await page.goto(url_with_answers, { timeout: 5000, waitUntil: 'networkidle2' })
-            // because page.waitForTimeout was deprecated :(
-            await new Promise(r => setTimeout(r, 2000));
         } catch (error) {
             console.error("Error in puppeteer here:", error)
         } finally {
@@ -69,7 +60,7 @@ const rateLimit = {
         }
     });
 
-    // Render my answers on the screen
+    // Render my answers on the screen, surely there's no problem here... right? 🫠
     fastify.get('/answers', (request, reply) => {
         const answers = request.query;
         let html = "<h1>Answers:</h1><br/>"
@@ -83,9 +74,7 @@ const rateLimit = {
         reply.sendFile('index.html');
     });
 
-    // Run the server!
     fastify.listen({ port }, async (err, address) => {
-
         console.log(`[*] Listening on port ${port} ${address}`)
         browser = await puppeteer.launch({
             pipe: true,
@@ -101,7 +90,6 @@ const rateLimit = {
                 '--no-first-run' // Skip first-run setup
             ]
         })
-
     })
 })();
 // I am sad about this IIFE nonsense due to fastify4 affecting fastify.register(...) and CommonJS not supporting top level awaits
