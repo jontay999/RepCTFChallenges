@@ -2,24 +2,6 @@ const question_keys = ["math", "chemical_eng", "eee"]
 const num_qns = question_keys.length
 const open_ended = "materials_eng"
 
-
-// If the query parameters are set, fill in the form.
-// function read_query_params() {
-//     const params = new URLSearchParams(window.location.search)
-//     console.log("params:", params)
-//     valid_values = ["true", "false"]
-
-//     params.forEach((value, key) => {
-//         if (key === open_ended) {
-//             const div = document.createElement('div');
-//             div.innerHTML = value;
-
-//         } else if (question_keys.includes(key) && valid_values.includes(value)) {
-//             document.querySelector(`input[name="${key}"][value="${value}"]`).checked = true;
-//         };
-//     });
-// }
-
 const submit_form = () => {
     const answers = {}
     for (let qn_key of question_keys) {
@@ -44,10 +26,8 @@ const submit_form = () => {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    // read_query_params()
     document.getElementById("form").addEventListener('submit', async (e) => {
         e.preventDefault();
         submit_form();
     })
-    // document.getElementById("emc-submit").addEventListener('click', submit_form)
 });
