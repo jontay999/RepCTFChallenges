@@ -41,6 +41,8 @@ COPY public /usr/share/nginx/html
 
 - simple sqli to login as `admin`
 
-3. xss1 (in progress)
+3. xss1 (done)
 
-- notes app, admin bot can read the notes
+- quiz app, admin bot can read the notes
+
+4. ssrf1
