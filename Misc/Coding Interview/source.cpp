@@ -41,18 +41,16 @@ void print_menu()
     cout << "3. Exit\n";
 }
 
-vector<int> receive_input()
+void receive_input(vector<int> &all_numbers)
 {
     int max_input_size = 1000;
     cout << "Enter 1000 space-separated numbers:\n";
-    vector<int> numbers;
     int num = 0;
     for (int i = 0; i < max_input_size; ++i)
     {
         cin >> num;
-        numbers.push_back(num);
+        all_numbers.push_back(num);
     }
-    return numbers;
 }
 
 void run_two_sum(vector<int> &numbers)
@@ -71,7 +69,8 @@ void run_two_sum(vector<int> &numbers)
     cout << "The total time is " << time << "\n";
     if (time > 5.0)
     {
-        cout << flag << endl;
+        cout << "how did you do that? \n";
+        cout << flag << "\n";
     }
 }
 
@@ -80,14 +79,13 @@ int main()
     // Ignore these two lines
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    vector<int> numbers;
     int input_count = 0;
     const int max_inputs = 20;
     vector<int> all_numbers;
+    int choice;
     while (true)
     {
         print_menu();
-        int choice;
         cin >> choice;
         switch (choice)
         {
@@ -96,17 +94,20 @@ int main()
             {
                 cout << "You have reached the maximum number of inputs.\n";
                 cout << "Exiting...\n";
-                return 0;
+                exit(0);
             }
-            vector<int> numbers = receive_input();
+            receive_input(all_numbers);
             input_count++;
             break;
         case 2:
-            if (numbers.size() < 2)
+            if (all_numbers.size() < 2)
                 cout << "You need at least 2 numbers in your array. Please use option 1 to enter numbers first.\n";
             else
-                cout << "running ";
-            break;
+            {
+                cout << "Running my two_sum solution against your input of " << all_numbers.size() << " numbers\n";
+                run_two_sum(all_numbers);
+            }
+            return 0;
 
         case 3:
             cout << "Exiting...\n";
