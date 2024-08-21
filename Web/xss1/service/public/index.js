@@ -20,6 +20,10 @@ const submit_form = () => {
                 alert("Answers submitted! I'll get an admin to check those answers soon...")
                 window.location.href = response.url;
             }
+            else if (response.status === 429) {
+                alert('Too many requests. Each IP should only submit maximum 3 times a minute');
+            }
+
         })
         .catch(error => console.error('Error:', error));
 }

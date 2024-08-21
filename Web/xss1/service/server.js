@@ -1,5 +1,7 @@
 const puppeteer = require("puppeteer")
-const fastify = require('fastify')()
+const fastify = require('fastify')({
+    trustProxy: true
+})
 const path = require('path');
 
 fastify.register(require('@fastify/static'), {
@@ -12,7 +14,7 @@ const port = 3000;
 
 // Apply a rate limit of 3/min per IP for /submit as it  launches my admin bot which is a bit expensive
 const rateLimit = {
-    max: 3,
+    max: 5,
     timeWindow: '1 minute',
     allowList: [],
     onExceeded: function (request, key) {
@@ -33,13 +35,16 @@ const rateLimit = {
     const verify_answers = async (answers) => {
         const query_param = new URLSearchParams(answers).toString();
         const base_url = `http://localhost:${port}`
-        const ctx = await browser.createBrowserContext()
+        const ctx = await browser.createIncognitoBrowserContext()
         const page = await ctx.newPage()
         await page.goto(base_url, { timeout: 5000, waitUntil: 'networkidle2' })
         await page.setCookie(...cookies);
         try {
             const url_with_answers = `${base_url}/answers?${query_param}`
+            console.log(`[*] Visiting ${url_with_answers}`)
             await page.goto(url_with_answers, { timeout: 5000, waitUntil: 'networkidle2' })
+            await page.waitForTimeout(1000)
+            console.log(`[*] Finished visiting ${url_with_answers}`)
         } catch (error) {
             console.error("Error in puppeteer here:", error)
         } finally {
@@ -47,6 +52,9 @@ const rateLimit = {
             await ctx.close()
         }
     }
+    (async () => {
+        browser = await puppeteer.launch({ dumpio: true })
+    })();
 
     fastify.post('/submit', { config: { rateLimit } }, (request, reply) => {
         try {
@@ -74,22 +82,29 @@ const rateLimit = {
         reply.sendFile('index.html');
     });
 
-    fastify.listen({ port }, async (err, address) => {
+    fastify.listen({ port, host: '0.0.0.0' }, async (err, address) => {
         console.log(`[*] Listening on port ${port} ${address}`)
         browser = await puppeteer.launch({
             pipe: true,
             dumpio: true,
+            headless: true,
+            timeout: 0,
             args: [
                 '--incognito',
+                "--disable-setuid-sandbox",
                 '--disable-dev-shm-usage', // Docker stuff
                 '--js-flags=--noexpose_wasm,--jitless', // No Chrome n-days please
                 '--disable-background-networking',
                 '--disable-default-apps',
                 '--disable-extensions',
                 '--disable-sync',
+                '--disable-gpu',
+                '--user-data-dir=/tmp',
+                '--disable-software-rasterizer',
                 '--no-first-run' // Skip first-run setup
             ]
-        })
+        });
+        console.log(`[*] Browser successfully launched`)
     })
 })();
 // I am sad about this IIFE nonsense due to fastify4 affecting fastify.register(...) and CommonJS not supporting top level awaits
