@@ -13,3 +13,4 @@ lines.append('2')
 print(len(lines))
 with open('input.txt', 'w') as f:
     f.write('\n'.join(lines))
+
