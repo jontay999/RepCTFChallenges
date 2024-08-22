@@ -1,4 +1,4 @@
 ```
-docker build -t repctf-misc-3 .
-docker run -d -p 4003:5000 --name misc-3 --privileged repctf-misc-3
+docker build -t repctf-misc-4 .
+docker run -d -p 4004:5000 --name misc-4 --privileged repctf-misc-4
 ```

