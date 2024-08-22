@@ -6,4 +6,3 @@ ENV JAIL_MEM  20M
 
 COPY --from=ubuntu:22.04 / /srv
 COPY --chmod=755 two_sum /srv/app/run
-COPY --chmod=744 flag.txt /srv/app/flag.txt

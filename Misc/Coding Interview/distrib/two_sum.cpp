@@ -1,3 +1,4 @@
+// g++-13 two_sum.cpp -o two_sum
 #include <iostream>
 #include <unordered_map>
 #include <ctime>
@@ -81,7 +82,7 @@ int main()
     while (true)
     {
         print_menu();
-	cout << "Remaining Inputs: " << remaining_inputs << "\n";
+        cout << "Remaining Inputs: " << remaining_inputs << "\n";
         cin >> choice;
         switch (choice)
         {
