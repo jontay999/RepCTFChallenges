@@ -1,4 +1,3 @@
-// g++-13 two_sum.cpp -o two_sum
 #include <iostream>
 #include <unordered_map>
 #include <ctime>
@@ -39,6 +38,7 @@ void print_menu()
     cout << "1. Take in input \n";
     cout << "2. Run your input against my 2 sum solution \n";
     cout << "3. Exit \n";
+    cout.flush();
 }
 
 void run_two_sum(vector<long long> &numbers)
@@ -73,8 +73,6 @@ int main()
     // Just to make the I/O faster
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    setbuf(stdin, 0);
-    setbuf(stdout, 0);
 
     int remaining_inputs = 1000;
     vector<long long> all_numbers;
@@ -82,17 +80,16 @@ int main()
     while (true)
     {
         print_menu();
-        cout << "Remaining Inputs: " << remaining_inputs << "\n";
+        cout << "Remaining Inputs: " << remaining_inputs-- << "\n";
+        if (remaining_inputs <= 0)
+        {
+            cout << "Inputs exhausted!\n";
+            cout << "Exiting...\n";
+        }
         cin >> choice;
         switch (choice)
         {
         case 1:
-            if (remaining_inputs-- <= 0)
-            {
-                cout << "You have reached the maximum number of inputs.\n";
-                cout << "Exiting...\n";
-                exit(0);
-            }
             receive_input(all_numbers);
             break;
         case 2:
