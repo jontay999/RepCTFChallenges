@@ -1,5 +1,7 @@
 #!/usr/local/bin/python3
 
+
+# the flag is located at './flag.txt'
 banner = """
   ================================================================  
   ================================================================  
@@ -40,27 +42,26 @@ banner = """
   Given a limited character set and limited execution, try to read "flag.txt" from the system!
 """
 
-# No opening files for you!
-open = None
+# no letters for you!!!
+def is_allowed(your_code):
+  blacklist = set("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") 
+  for c in your_code:
+     if c in blacklist: 
+        return False
+  return True
 
-# And no imports this time!
-__builtins__.__import__ = None
-
-
-MAX_CODE_SIZE = 15
-def jail2():
-    print("You made it here? I guess 30 characters was too much...")
-    print("You get 15 characters only this time")
+MAX_CODE_SIZE = 300
+def jail3():
+    print("You made it here? Fine, I guess i'll just remove the entire alphabet from you...")
     your_code = input("> ")
     if(len(your_code) > MAX_CODE_SIZE):
         print("nope nope nope nope, too many characters: ", len(your_code))
+    elif not is_allowed(your_code):
+       print("no alphabet allowed!")
     else:
-      print(f"Your code has {len(your_code)} characters, go ahead and run it")
-      eval(your_code)
-
-    print("Did you get it?")
+      print(f"not bad, no alphabet, and only {len(your_code)} characters, but how will you do without any builtins?")
+      eval(your_code, {"__builtins__": {}})
 
 if __name__ == "__main__":
     print(banner)
-    jail2()
-
+    jail3()
