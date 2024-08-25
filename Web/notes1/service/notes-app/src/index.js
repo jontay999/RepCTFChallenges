@@ -3,11 +3,9 @@ import ReactDOM from 'react-dom/client';
 import { ChakraProvider } from '@chakra-ui/react';
 import { BrowserRouter } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
-import Index from './pages/Index';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Home from './pages/Home';
-import Post from './pages/Post';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -16,11 +14,9 @@ root.render(
     <ChakraProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/post/:id" element={<Post />} />
         </Routes>
       </BrowserRouter>
     </ChakraProvider>
