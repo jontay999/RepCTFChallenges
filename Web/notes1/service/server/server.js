@@ -41,27 +41,16 @@ app.use((req, res, next) => {
 
 app.post("/api/login", (req, res) => {
     let { user, pass } = req.body;
-    if (
-        !user ||
-        !pass ||
-        typeof user !== "string" ||
-        typeof pass !== "string"
-    ) {
-        return res.json({
-            success: false,
-            error: "Missing username or password",
-        });
+    if (is_invalid(user, pass)) {
+        return res.json(make_error("Missing username or password"));
     }
 
     if (!users.has(user)) {
-        return res.json({
-            success: false,
-            error: "No user exists with that username",
-        });
+        return res.json(make_error("No user with that username exists"));
     }
 
     if (users.get(user).pass !== sha256(pass)) {
-        return res.json({ success: false, error: "Invalid password" });
+        return res.json(make_error("invalid password"));
     }
     req.session.user = user;
     res.json({ success: true });
@@ -78,10 +67,7 @@ app.post("/api/register", (req, res) => {
     }
 
     req.session.user = user;
-    users.set(user, {
-        pass: sha256(pass),
-        posts: [],
-    });
+    users.set(user, { pass: sha256(pass), posts: [] });
     res.json({ success: true });
 });
 
@@ -101,10 +87,8 @@ app.post("/api/create", auth, (req, res) => {
     }
 
     let id = crypto.randomBytes(6).toString("hex");
-
     posts.set(id, { id, title, body });
     req.user.posts.push(id);
-
     res.json({ success: true });
 });
 

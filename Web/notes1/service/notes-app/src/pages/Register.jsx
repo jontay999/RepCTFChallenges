@@ -1,4 +1,5 @@
 import * as React from "react";
+import { SERVER_URL } from "../utils";
 import {
   Flex,
   Box,
@@ -28,7 +29,7 @@ export default function SimpleCard() {
     if (!user || !pass) {
       return setError("Missing username or password.");
     }
-    fetch("/api/register", {
+    fetch(`${SERVER_URL}/api/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
