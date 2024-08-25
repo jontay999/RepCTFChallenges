@@ -1,33 +1,33 @@
 import * as React from "react";
 import {
+  Flex,
   Box,
-  Heading,
-  Container,
-  Text,
-  Button,
-  Stack,
-  useColorModeValue,
   FormControl,
+  FormLabel,
   Input,
+  Stack,
+  Button,
+  Heading,
+  Text,
+  useColorModeValue,
   Alert,
   AlertTitle,
   AlertIcon,
 } from "@chakra-ui/react";
+
 import { useNavigate, Link } from "react-router-dom";
 
-export default function Register() {
+export default function SimpleCard() {
   const [user, setUser] = React.useState("");
   const [pass, setPass] = React.useState("");
-  const [error, setError] = React.useState(null);
+  const [error, setError] = React.useState("");
 
   const navigate = useNavigate();
-
   const register = async (e) => {
     e && e.preventDefault();
     if (!user || !pass) {
       return setError("Missing username or password.");
     }
-
     fetch("/api/register", {
       method: "POST",
       headers: {
@@ -45,85 +45,70 @@ export default function Register() {
   };
 
   return (
-    <>
-      <Container maxW="3xl">
-        <Stack
-          as={Box}
-          textAlign="center"
-          spacing={{ base: 8, md: 14 }}
-          py={{ base: 20, md: 36 }}
-          alignItems="center"
+    <Flex
+      minH={"100vh"}
+      align={"center"}
+      justify={"center"}
+      bg={useColorModeValue("gray.50", "gray.800")}
+    >
+      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+        <Stack align={"center"}>
+          <Heading fontSize={"4xl"}>Notes App 📋</Heading>
+          <Text fontSize={"lg"} color={"gray.600"}>
+            Register to post notes and view other people's notes ✌️
+          </Text>
+        </Stack>
+        <Box
+          rounded={"lg"}
+          bg={useColorModeValue("white", "gray.700")}
+          boxShadow={"lg"}
+          p={8}
         >
-          <Heading
-            fontWeight={600}
-            fontSize={{ base: "2xl", sm: "4xl", md: "6xl" }}
-            lineHeight="110%"
-          >
-            <Text as="span" color="green.400">
-              modernblog
-            </Text>
-          </Heading>
-
-          <Stack
-            spacing={4}
-            w="full"
-            maxW="md"
-            bg={useColorModeValue("gray.50", "gray.700")}
-            rounded="xl"
-            boxShadow="2xl"
-            p={6}
-            my={12}
-            as="form"
-            onSubmit={register}
-          >
-            <Heading lineHeight={1.1} fontSize={{ base: "2xl", md: "3xl" }}>
-              Register
-            </Heading>
+          <Stack spacing={4}>
+            <FormControl id="username">
+              <FormLabel>Username</FormLabel>
+              <Input
+                name="username"
+                type="text"
+                onChange={(e) => setUser(e.target.value)}
+                value={user}
+              />
+            </FormControl>
+            <FormControl id="password">
+              <FormLabel>Password</FormLabel>
+              <Input
+                name="password"
+                type="password"
+                onChange={(e) => setPass(e.target.value)}
+                value={pass}
+              />
+            </FormControl>
             {error && (
               <Alert status="error" variant="solid">
                 <AlertIcon />
                 <AlertTitle>{error}</AlertTitle>
               </Alert>
             )}
-            <FormControl>
-              <Input
-                placeholder="username"
-                name="user"
-                _placeholder={{ color: "gray.500" }}
-                type="text"
-                onChange={(e) => setUser(e.target.value)}
-                value={user}
-              />
-            </FormControl>
-            <FormControl>
-              <Input
-                placeholder="password"
-                name="pass"
-                _placeholder={{ color: "gray.500" }}
-                type="password"
-                onChange={(e) => setPass(e.target.value)}
-                value={pass}
-              />
-            </FormControl>
-            <Stack spacing={6}>
+            <Stack spacing={10}>
               <Button
-                bg="blue.400"
-                color="white"
+                bg={"blue.400"}
+                color={"white"}
                 _hover={{
                   bg: "blue.500",
                 }}
                 onClick={register}
-                type="submit"
               >
                 Register
               </Button>
             </Stack>
-            <Button variant="link" as={Link} to="/">
-              Back
-            </Button>
+            <Stack spacing={10}>
+              <Button variant="link" as={Link} to="/login">
+                Sign in
+              </Button>
+            </Stack>
           </Stack>
-        </Stack>
-      </Container>
-    </>
+        </Box>
+      </Stack>
+    </Flex>
   );
 }
