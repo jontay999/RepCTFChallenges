@@ -30,8 +30,3 @@ if __name__ == "__main__":
     with open("encrypted.txt", "w") as f:
         f.write(encrypted_text +"\n")
         f.write(encrypted_flag)
-
-"""
-=?)u
-+Cbj
-"""
