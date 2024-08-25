@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import { ChakraProvider } from '@chakra-ui/react';
 import { BrowserRouter } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
-import Register from './pages/Register';
 import Login from './pages/Login';
 import Home from './pages/Home';
 
@@ -14,7 +13,6 @@ root.render(
     <ChakraProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/home" element={<Home />} />
         </Routes>

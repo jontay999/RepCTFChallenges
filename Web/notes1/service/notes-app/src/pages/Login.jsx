@@ -24,25 +24,23 @@ export default function SimpleCard() {
   const [error, setError] = React.useState("");
 
   const navigate = useNavigate();
-  const login = async (e) => {
-    e && e.preventDefault();
+  const authenticate = async (route) => {
     if (!user || !pass) {
       return setError("Missing username or password.");
     }
-    fetch(`${SERVER_URL}/api/login`, {
+    const response = await fetch(`${SERVER_URL}/api/${route}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ user, pass }),
-    })
-      .then((r) => r.json())
-      .then((resp) => {
-        if (!resp.success) {
-          return setError(resp.error);
-        }
-        navigate("/home");
-      });
+    });
+    const data = await response.json();
+    if (!data.success) {
+      return setError(data.error);
+    }
+    // give some time for server to authenticate
+    setTimeout(() => navigate("/home"), 2000);
   };
 
   return (
@@ -97,13 +95,21 @@ export default function SimpleCard() {
                 _hover={{
                   bg: "blue.500",
                 }}
-                onClick={login}
+                onClick={async (e) => {
+                  e && e.preventDefault();
+                  await authenticate("login");
+                }}
               >
                 Sign in
               </Button>
             </Stack>
             <Stack spacing={10}>
-              <Button variant="link" as={Link} to="/register">
+              <Button
+                onClick={(e) => {
+                  e && e.preventDefault();
+                  authenticate("register");
+                }}
+              >
                 Register
               </Button>
             </Stack>

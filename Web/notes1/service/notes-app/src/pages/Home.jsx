@@ -26,8 +26,9 @@ const Home = () => {
     fetch(`${SERVER_URL}/api/posts`, { method: "POST" })
       .then((r) => r.json())
       .then((resp) => {
+        console.log("resp:", resp);
         if (!resp.success) {
-          return navigate("/");
+          return navigate("/login");
         }
         setPosts(resp.data);
         console.log("got posts");

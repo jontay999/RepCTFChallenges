@@ -1,5 +1,6 @@
 const express = require("express");
 const crypto = require("crypto");
+const cors = require("cors")
 const PORT = process.env.PORT || 8080;
 const sha256 = (data) => crypto.createHash("sha256").update(data).digest("hex");
 
@@ -19,13 +20,16 @@ app.use(
     })
 );
 app.use(express.json());
+app.use(cors({
+    origin: 'http://localhost:3000'
+}));
 
 const users = new Map();
 const posts = new Map();
 const is_invalid = (...args) => {
     return args.some(arg => !arg || typeof arg !== "string");
 };
-const make_error = (error) => { success: false, error }
+const make_error = (error) => ({ success: false, error })
 
 // Might need to adjust the content-security-policy
 app.use((req, res, next) => {
