@@ -41,8 +41,7 @@ export default function SimpleCard() {
     if (!data.success) {
       return setError(data.error);
     }
-    // give some time for server to authenticate
-    setTimeout(() => navigate("/home"), 2000);
+    navigate("/home");
   };
 
   return (
