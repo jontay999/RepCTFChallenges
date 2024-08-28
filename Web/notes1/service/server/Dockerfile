@@ -8,6 +8,7 @@ adduser --disabled-password --gecos "" --ingroup inmate inmate
 WORKDIR /home/inmate/app
 COPY package*.json ./
 COPY server.js ./
+COPY public/ ./public/
 
 ENV NODE_ENV=production 
 RUN chown -R inmate:inmate . && \
