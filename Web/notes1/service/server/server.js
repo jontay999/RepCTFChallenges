@@ -1,23 +1,20 @@
 const express = require("express");
 const crypto = require("crypto");
-const cors = require("cors")
 const { unflatten } = require('flat')
 const PORT = 8000;
 const sha256 = (data) => crypto.createHash("sha256").update(data).digest("hex");
 const app = express();
 const session = require("express-session");
 const MemoryStore = require("memorystore")(session)
+
+app.use(express.static("public"));
 app.use(express.json());
-app.use(cors({
-    origin: 'http://localhost:3000',
-    credentials: true
-}));
 
 const flag = "REP{FAKE_FLAG}"
 
 app.use(
     session({
-        cookie: { maxAge: 3600000, sameSite: 'lax', secure: false },
+        cookie: { maxAge: 3600000 },
         store: new MemoryStore({
             checkPeriod: 3600000, // prune expired entries every 1h
         }),
@@ -111,4 +108,5 @@ app.get("/api/post/:id", auth, (req, res) => {
     return res.json({ success: true, data: posts.get(id), flag: req.session.user.is_admin ? flag : "sorry only admins get to see the flag" });
 });
 
+app.get("*", (req, res) => res.sendFile("index.html", { root: "public" }));
 app.listen(PORT, () => console.log(`app listening on port ${PORT}`));

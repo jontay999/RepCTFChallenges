@@ -34,7 +34,7 @@ const ViewPost = () => {
 
   useEffect(() => {
     get_post();
-  }, [id, navigate]);
+  }, []);
 
   return (
     <Box

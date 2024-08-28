@@ -30,7 +30,7 @@ const Home = () => {
   };
   useEffect(() => {
     fetch_posts();
-  }, [navigate]);
+  }, []);
 
   return (
     <>
