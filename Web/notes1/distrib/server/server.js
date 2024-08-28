@@ -73,7 +73,7 @@ app.post("/api/register", (req, res) => {
 const auth = (req, res, next) =>
     req.session.user
         ? next()
-        : res.json(make_error("You must be logged 2in!"));
+        : res.json(make_error("You must be logged in!"));
 
 app.post("/api/create", auth, (req, res) => {
     let { title, content } = unflatten(req.body);
