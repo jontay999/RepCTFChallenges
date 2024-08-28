@@ -1,9 +1,9 @@
 const express = require("express");
 const crypto = require("crypto");
 const cors = require("cors")
-const PORT = process.env.PORT || 8080;
+const { unflatten } = require('flat')
+const PORT = 8000;
 const sha256 = (data) => crypto.createHash("sha256").update(data).digest("hex");
-
 const app = express();
 const session = require("express-session");
 const MemoryStore = require("memorystore")(session)
@@ -12,6 +12,8 @@ app.use(cors({
     origin: 'http://localhost:3000',
     credentials: true
 }));
+
+const flag = "REP{FAKE_FLAG}"
 
 app.use(
     session({
@@ -32,12 +34,7 @@ const is_invalid = (...args) => {
 };
 const make_error = (error) => ({ success: false, error })
 
-// Might need to adjust the content-security-policy
 app.use((req, res, next) => {
-    res.setHeader(
-        "Content-Security-Policy",
-        "script-src 'self'; object-src 'none'; base-uri 'none';"
-    );
     if (req.session.user && users.has(req.session.user)) {
         req.user = users.get(req.session.user);
     }
@@ -82,17 +79,15 @@ const auth = (req, res, next) =>
         : res.json(make_error("You must be logged 2in!"));
 
 app.post("/api/create", auth, (req, res) => {
-    if (req.session.user === "admin") {
-        return res.json(make_error("You are not admin..."))
-    }
-
-    let { title, body } = req.body;
-    if (is_invalid(title, body)) {
-        return res.json(make_error("Missing title or body"))
+    let { title, content } = unflatten(req.body);
+    let x = {}
+    console.log("title, content", title, content, x.polluted);
+    if (is_invalid(title, content)) {
+        return res.json(make_error("Missing title or content"))
     }
 
     let id = crypto.randomBytes(6).toString("hex");
-    posts.set(id, { id, title, body });
+    posts.set(id, { id, title, content });
     req.user.posts.push(id);
     res.json({ success: true });
 });
@@ -112,7 +107,8 @@ app.get("/api/post/:id", auth, (req, res) => {
     if (!posts.has(id)) {
         return res.json(make_error("No post with that id"))
     }
-    return res.json({ success: true, data: posts.get(id) });
+    console.log("got here", posts.get(id), req.session.user.is_admin)
+    return res.json({ success: true, data: posts.get(id), flag: req.session.user.is_admin ? flag : "sorry only admins get to see the flag" });
 });
 
 app.listen(PORT, () => console.log(`app listening on port ${PORT}`));

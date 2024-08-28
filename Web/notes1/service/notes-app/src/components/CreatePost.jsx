@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import { SERVER_URL } from "../utils";
 import {
   Button,
@@ -14,12 +14,13 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-const CreatePost = () => {
-  const [title, setTitle] = React.useState("");
-  const [content, setContent] = React.useState("");
-  const [error, setError] = React.useState("");
+const CreatePost = ({ callback }) => {
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [error, setError] = useState("");
 
-  const submit = async () => {
+  const submit = async (e) => {
+    e.preventDefault();
     if (!title || !content) {
       return setError("Missing content or title.");
     }
@@ -29,16 +30,19 @@ const CreatePost = () => {
         "Content-Type": "application/json",
       },
       credentials: "include",
-      body: JSON.stringify({ title, content }),
+      body: JSON.stringify({
+        title,
+        content,
+      }),
     });
     const data = await response.json();
-    console.log("create response data:", data);
     if (!data.success) {
       return setError(data.error);
     }
     setTitle("");
     setContent("");
     setError("");
+    callback();
   };
 
   return (
@@ -84,10 +88,7 @@ const CreatePost = () => {
               _hover={{
                 bg: "blue.500",
               }}
-              onClick={async (e) => {
-                e && e.preventDefault();
-                submit();
-              }}
+              onClick={submit}
             >
               Create
             </Button>

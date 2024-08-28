@@ -1,48 +1,42 @@
-import * as React from "react";
+import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import {
   Box,
   Heading,
-  Container,
   Text,
   Button,
   Stack,
   useColorModeValue,
   Flex,
-  FormControl,
-  Input,
-  Textarea,
-  Alert,
-  AlertIcon,
-  AlertTitle,
 } from "@chakra-ui/react";
 
 import { SERVER_URL } from "../utils";
 import { Link, useNavigate } from "react-router-dom";
 import CreatePost from "../components/CreatePost";
 const Home = () => {
-  const [posts, setPosts] = React.useState([]);
+  const [posts, setPosts] = useState([]);
   const navigate = useNavigate();
 
-  const fetchPosts = () => {
-    fetch(`${SERVER_URL}/api/posts`, { credentials: "include", method: "POST" })
-      .then((r) => r.json())
-      .then((resp) => {
-        console.log("resp:", resp);
-        if (!resp.success) {
-          return navigate("/");
-        }
-        setPosts(resp.data);
-        console.log("got posts");
-      });
+  const fetch_posts = async () => {
+    const response = await fetch(`${SERVER_URL}/api/posts`, {
+      credentials: "include",
+      method: "POST",
+    });
+    const data = await response.json();
+    if (!data.success) {
+      return navigate("/");
+    }
+    setPosts(data.data);
   };
-  React.useEffect(fetchPosts, [navigate]);
+  useEffect(() => {
+    fetch_posts();
+  }, [navigate]);
 
   return (
     <>
       <Header />
       <Flex width={"100%"} justifyContent={"center"}>
-        <CreatePost />
+        <CreatePost callback={fetch_posts} />
         <Stack flex={1} spacing={8} py={12} px={6}>
           <Box
             rounded={"lg"}
@@ -65,7 +59,8 @@ const Home = () => {
                           to={`/post/${post.id}`}
                           justifyContent="start"
                         >
-                          <Text>{post.title}</Text>
+                          <Text fontWeight="bold">{post.title}: </Text>
+                          <Text ml={1}>{post.content}</Text>
                         </Button>
                       </li>
                     </Box>

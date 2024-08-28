@@ -15,7 +15,7 @@ import {
 import { Link } from "react-router-dom";
 import { HamburgerIcon, CloseIcon, ArrowForwardIcon } from "@chakra-ui/icons";
 
-const Links = ["Home", "Create"];
+const Links = ["Home"];
 
 const NavLink = ({ children }) => {
   return (
@@ -35,6 +35,7 @@ const NavLink = ({ children }) => {
   );
 };
 
+// if I'm being honest, this is a pretty useless file, I'm just leaving this here because I don't want to waste mny work hahhaha
 const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (

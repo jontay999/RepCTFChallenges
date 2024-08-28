@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import { SERVER_URL } from "../utils";
 import {
   Flex,
@@ -16,12 +16,12 @@ import {
   AlertIcon,
 } from "@chakra-ui/react";
 
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function SimpleCard() {
-  const [user, setUser] = React.useState("");
-  const [pass, setPass] = React.useState("");
-  const [error, setError] = React.useState("");
+  const [user, setUser] = useState("");
+  const [pass, setPass] = useState("");
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
   const authenticate = async (route) => {
@@ -37,7 +37,6 @@ export default function SimpleCard() {
       body: JSON.stringify({ user, pass }),
     });
     const data = await response.json();
-    console.log("response data:", data, route);
     if (!data.success) {
       return setError(data.error);
     }
@@ -51,7 +50,7 @@ export default function SimpleCard() {
       justify={"center"}
       bg={useColorModeValue("gray.50", "gray.800")}
     >
-      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+      <Stack spacing={8} mx={"auto"} py={12} px={6}>
         <Stack align={"center"}>
           <Heading fontSize={"4xl"}>Notes App 📋</Heading>
           <Text fontSize={"lg"} color={"gray.600"}>
