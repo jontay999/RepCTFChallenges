@@ -6,6 +6,7 @@ import {
   Button,
   Stack,
   useColorModeValue,
+  Flex,
 } from "@chakra-ui/react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 
@@ -37,19 +38,30 @@ const ViewPost = () => {
   }, []);
 
   return (
-    <Box
-      rounded={"lg"}
-      bg={useColorModeValue("white", "gray.700")}
-      boxShadow={"lg"}
-      p={8}
+    <Flex
+      minH={"100vh"}
+      align={"center"}
+      justify={"center"}
+      bg={useColorModeValue("gray.50", "gray.800")}
     >
-      <Stack spacing={4}></Stack>
-      <Heading>Title: {title}</Heading>
-      <div>Content: {content}</div>
-      <Button variant="link" as={Link} to="/home" my={4}>
-        Back
-      </Button>
-    </Box>
+      <Box
+        minW={400}
+        rounded={"lg"}
+        bg={useColorModeValue("white", "gray.700")}
+        boxShadow={"lg"}
+        p={24}
+        mx={12}
+        my={8}
+      >
+        <Stack spacing={4}>
+          <Heading>{title}</Heading>
+          <div>{content}</div>
+          <Button variant="link" as={Link} to="/home" my={4}>
+            Back
+          </Button>
+        </Stack>
+      </Box>
+    </Flex>
   );
 };
 
