@@ -23,12 +23,12 @@ const Home = () => {
   const navigate = useNavigate();
 
   const fetchPosts = () => {
-    fetch(`${SERVER_URL}/api/posts`, { method: "POST" })
+    fetch(`${SERVER_URL}/api/posts`, { credentials: "include", method: "POST" })
       .then((r) => r.json())
       .then((resp) => {
         console.log("resp:", resp);
         if (!resp.success) {
-          return navigate("/login");
+          return navigate("/");
         }
         setPosts(resp.data);
         console.log("got posts");

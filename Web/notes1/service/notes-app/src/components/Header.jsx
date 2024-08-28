@@ -68,7 +68,7 @@ const Header = () => {
               mr={4}
               rightIcon={<ArrowForwardIcon />}
               as={Link}
-              to="/login"
+              to="/"
             >
               Logout
             </Button>

@@ -7,10 +7,15 @@ const sha256 = (data) => crypto.createHash("sha256").update(data).digest("hex");
 const app = express();
 const session = require("express-session");
 const MemoryStore = require("memorystore")(session)
+app.use(express.json());
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+}));
 
 app.use(
     session({
-        cookie: { maxAge: 3600000 },
+        cookie: { maxAge: 3600000, sameSite: 'lax', secure: false },
         store: new MemoryStore({
             checkPeriod: 3600000, // prune expired entries every 1h
         }),
@@ -19,10 +24,6 @@ app.use(
         secret: crypto.randomBytes(32).toString("hex"),
     })
 );
-app.use(express.json());
-app.use(cors({
-    origin: 'http://localhost:3000'
-}));
 
 const users = new Map();
 const posts = new Map();
@@ -56,7 +57,7 @@ app.post("/api/login", (req, res) => {
     if (users.get(user).pass !== sha256(pass)) {
         return res.json(make_error("invalid password"));
     }
-    req.session.user = user;
+    req.user = user;
     res.json({ success: true });
 });
 
@@ -76,9 +77,9 @@ app.post("/api/register", (req, res) => {
 });
 
 const auth = (req, res, next) =>
-    req.user
+    req.session.user
         ? next()
-        : res.json(make_error("You must be logged in!"));
+        : res.json(make_error("You must be logged 2in!"));
 
 app.post("/api/create", auth, (req, res) => {
     if (req.session.user === "admin") {

@@ -33,9 +33,11 @@ export default function SimpleCard() {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify({ user, pass }),
     });
     const data = await response.json();
+    console.log("response data:", data, route);
     if (!data.success) {
       return setError(data.error);
     }
