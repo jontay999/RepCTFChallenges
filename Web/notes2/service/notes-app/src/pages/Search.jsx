@@ -24,7 +24,7 @@ const sample_results = [
 ];
 const Search = () => {
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState(sample_results);
+  const [results, setResults] = useState([]);
   const [error, setError] = useState("");
 
   const search = async (e) => {
@@ -32,17 +32,13 @@ const Search = () => {
     if (!query) {
       return setError("Query cannot be empty!");
     }
-    const response = await fetch(`${SERVER_URL}/api/search`, {
+    const response = await fetch(`${SERVER_URL}/api/search/${query}`, {
       headers: {
         "Content-Type": "application/json",
       },
       credentials: "include",
-      body: JSON.stringify({ query }),
     });
     const data = await response.json();
-    if (!data.success) {
-      return setError(data.error);
-    }
     setResults(data.results);
   };
 

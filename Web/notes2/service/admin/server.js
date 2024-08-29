@@ -29,7 +29,7 @@ app.use(
 );
 
 const users = new Map();
-const posts = new Map();
+const posts = new Array();
 const is_invalid = (...args) => {
     return args.some(arg => !arg || typeof arg !== "string");
 };
@@ -84,9 +84,9 @@ app.post("/api/create", auth, (req, res) => {
     if (is_invalid(title, content)) {
         return res.json(make_error("Missing title or content"))
     }
-
+    const user = req.user
     let id = crypto.randomBytes(6).toString("hex");
-    posts.set(id, { id, title, content });
+    posts.push({ user, id, title, content });
     req.user.posts.push(id);
     res.json({ success: true });
 });
@@ -94,20 +94,26 @@ app.post("/api/create", auth, (req, res) => {
 app.post("/api/posts", auth, (req, res) => {
     return res.json({
         success: true,
-        data: req.user.posts.map((id) => posts.get(id)),
+        data: posts.filter(post => post.user === req.user)
     });
 });
 
-app.get("/api/post/:id", auth, (req, res) => {
-    let { id } = req.params;
-    if (!id) {
-        return res.json(make_error("No id provided"))
+app.get("/api/search/:query", auth, (req, res) => {
+    let { query } = req.params;
+    if (!query) {
+        return res.json(make_error("No query provided"))
     }
-    if (!posts.has(id)) {
-        return res.json(make_error("No post with that id"))
+    const matching_posts = posts.filter(post => post.content.includes(query))
+    if (matching_posts.length === 0) {
+        return res.json({ success: false, results: [] })
     }
-    return res.json({ success: true, data: posts.get(id), flag: req.session.user.is_admin ? flag : "sorry only admins get to see the flag" });
+    const results = matching_posts.filter(post => post.user === req.user)
+    return res.json({ success: true, results });
 });
+
+
+
+
 
 // app.get("*", (req, res) => res.sendFile("index.html", { root: "public" }));
 app.listen(PORT, () => console.log(`app listening on port ${PORT}`));

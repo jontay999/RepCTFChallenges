@@ -53,15 +53,10 @@ const Home = () => {
                   posts.map((post, i) => (
                     <Box key={i} ml={4}>
                       <li style={{ textAlign: "left" }}>
-                        <Button
-                          variant="link"
-                          as={Link}
-                          to={`/post/${post.id}`}
-                          justifyContent="start"
-                        >
+                        <Box justifyContent="start">
                           <Text fontWeight="bold">{post.title}: </Text>
                           <Text ml={1}>{post.content}</Text>
-                        </Button>
+                        </Box>
                       </li>
                     </Box>
                   ))
