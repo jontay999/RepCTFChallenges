@@ -1,6 +1,5 @@
 const express = require("express");
 const crypto = require("crypto");
-// const cors = require("cors")
 const PORT = 8000;
 const sha256 = (data) => crypto.createHash("sha256").update(data).digest("hex");
 const app = express();
@@ -9,10 +8,6 @@ const MemoryStore = require("memorystore")(session)
 
 app.use(express.static("public"));
 app.use(express.json());
-// app.use(cors({
-//     origin: 'http://localhost:3000',
-//     credentials: true
-// }));
 
 app.use(
     session({
@@ -88,7 +83,6 @@ app.post("/api/create", auth, (req, res) => {
 });
 
 app.post("/api/posts", auth, (req, res) => {
-    console.log("posts:", posts)
     return res.json({
         success: true,
         data: posts.filter(post => post.user === req.session.user)
