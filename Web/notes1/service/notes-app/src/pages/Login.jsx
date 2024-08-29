@@ -18,7 +18,7 @@ import {
 
 import { useNavigate } from "react-router-dom";
 
-export default function SimpleCard() {
+const Login = () => {
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
   const [error, setError] = useState("");
@@ -118,4 +118,5 @@ export default function SimpleCard() {
       </Stack>
     </Flex>
   );
-}
+};
+export default Login;
