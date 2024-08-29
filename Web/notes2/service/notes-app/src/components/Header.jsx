@@ -15,7 +15,7 @@ import {
 import { Link } from "react-router-dom";
 import { HamburgerIcon, CloseIcon, ArrowForwardIcon } from "@chakra-ui/icons";
 
-const Links = ["Home"];
+const Links = ["Home", "Search"];
 
 const NavLink = ({ children }) => {
   return (
@@ -28,7 +28,7 @@ const NavLink = ({ children }) => {
         textDecoration: "none",
         bg: useColorModeValue("gray.200", "gray.700"),
       }}
-      href={`/${children}`}
+      href={`/${children.toLowerCase()}`}
     >
       {children}
     </Box>
