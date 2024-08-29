@@ -1,6 +1,5 @@
 const express = require("express");
 const crypto = require("crypto");
-const { unflatten } = require('flat')
 const PORT = 8000;
 const sha256 = (data) => crypto.createHash("sha256").update(data).digest("hex");
 const app = express();
@@ -10,11 +9,9 @@ const MemoryStore = require("memorystore")(session)
 app.use(express.static("public"));
 app.use(express.json());
 
-const flag = "REP{FAKE_FLAG}"
-
 app.use(
     session({
-        cookie: { maxAge: 3600000 },
+        cookie: { maxAge: 3600000, httpOnly: false },
         store: new MemoryStore({
             checkPeriod: 3600000, // prune expired entries every 1h
         }),
@@ -25,18 +22,19 @@ app.use(
 );
 
 const users = new Map();
-const posts = new Map();
+const posts = new Array();
+
+// Let me insert the flag into the db first :)
+const admin_pass = crypto.randomBytes(8).toString("hex")
+const flag = process.env.flag || "REP{FAKE_FLAG}"
+users.set("admin", sha256(admin_pass));
+posts.push({ user: "admin", title: "SECRET CONTENT", content: flag });
+
+
 const is_invalid = (...args) => {
     return args.some(arg => !arg || typeof arg !== "string");
 };
 const make_error = (error) => ({ success: false, error })
-
-app.use((req, res, next) => {
-    if (req.session.user && users.has(req.session.user)) {
-        req.user = users.get(req.session.user);
-    }
-    next();
-});
 
 app.post("/api/login", (req, res) => {
     let { user, pass } = req.body;
@@ -48,10 +46,10 @@ app.post("/api/login", (req, res) => {
         return res.json(make_error("No user with that username exists"));
     }
 
-    if (users.get(user).pass !== sha256(pass)) {
+    if (users.get(user) !== sha256(pass)) {
         return res.json(make_error("invalid password"));
     }
-    req.user = user;
+    req.session.user = user;
     res.json({ success: true });
 });
 
@@ -66,7 +64,7 @@ app.post("/api/register", (req, res) => {
     }
 
     req.session.user = user;
-    users.set(user, { pass: sha256(pass), posts: [] });
+    users.set(user, sha256(pass));
     res.json({ success: true });
 });
 
@@ -76,34 +74,35 @@ const auth = (req, res, next) =>
         : res.json(make_error("You must be logged 2in!"));
 
 app.post("/api/create", auth, (req, res) => {
-    let { title, content } = unflatten(req.body);
+    let { title, content } = req.body;
     if (is_invalid(title, content)) {
         return res.json(make_error("Missing title or content"))
     }
-
-    let id = crypto.randomBytes(6).toString("hex");
-    posts.set(id, { id, title, content });
-    req.user.posts.push(id);
+    posts.push({ user: req.session.user, title, content });
     res.json({ success: true });
 });
 
 app.post("/api/posts", auth, (req, res) => {
     return res.json({
         success: true,
-        data: req.user.posts.map((id) => posts.get(id)),
+        data: posts.filter(post => post.user === req.session.user)
     });
 });
 
-app.get("/api/post/:id", auth, (req, res) => {
-    let { id } = req.params;
-    if (!id) {
-        return res.json(make_error("No id provided"))
+app.get("/api/search/:query", auth, (req, res) => {
+    let { query } = req.params;
+    if (!query) {
+        return res.json(make_error("No query provided"))
     }
-    if (!posts.has(id)) {
-        return res.json(make_error("No post with that id"))
+    const matching_posts = posts.filter(post => post.content.includes(query))
+    if (matching_posts.length === 0) {
+        return res.json({ success: false, results: [] })
     }
-    return res.json({ success: true, data: posts.get(id), flag: req.session.user.is_admin ? flag : "sorry only admins get to see the flag" });
+    const results = matching_posts.filter(post => post.user === req.session.user).map(post => ({ title: post.title, content: post.content }))
+    return res.json({ success: true, results });
 });
+
+
 
 app.get("*", (req, res) => res.sendFile("index.html", { root: "public" }));
 app.listen(PORT, () => console.log(`app listening on port ${PORT}`));

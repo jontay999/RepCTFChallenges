@@ -11,6 +11,7 @@ COPY server.js ./
 COPY public/ ./public/
 
 ENV NODE_ENV=production 
+ENV flag=REP{have_you_heard_of_xs_leaks}
 RUN chown -R inmate:inmate . && \
 npm ci --omit=dev --ignore-scripts --no-audit --no-fund
 USER inmate
