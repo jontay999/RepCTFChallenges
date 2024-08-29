@@ -1,6 +1,6 @@
 const express = require("express");
 const crypto = require("crypto");
-const cors = require("cors")
+// const cors = require("cors")
 const PORT = 8000;
 const sha256 = (data) => crypto.createHash("sha256").update(data).digest("hex");
 const app = express();
@@ -9,10 +9,10 @@ const MemoryStore = require("memorystore")(session)
 
 app.use(express.static("public"));
 app.use(express.json());
-app.use(cors({
-    origin: 'http://localhost:3000',
-    credentials: true
-}));
+// app.use(cors({
+//     origin: 'http://localhost:3000',
+//     credentials: true
+// }));
 
 app.use(
     session({
@@ -110,5 +110,5 @@ app.get("/api/search/:query", auth, (req, res) => {
 
 
 
-// app.get("*", (req, res) => res.sendFile("index.html", { root: "public" }));
+app.get("*", (req, res) => res.sendFile("index.html", { root: "public" }));
 app.listen(PORT, () => console.log(`app listening on port ${PORT}`));
