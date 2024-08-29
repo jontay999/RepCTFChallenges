@@ -48,8 +48,12 @@ class Oracle:
             return "That wasn't so nice..."
 
 
+def get_flag():
+	with open("flag.txt", "rb") as f:
+		return f.read()
+
 def main():
-	flag = b'REP{5hort_fl4g_t0_s4ve_t1m3}'
+	flag = get_flag()
 	block_size = 16
 	key = randbytes(block_size)
 	oracle = Oracle(key, block_size)

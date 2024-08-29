@@ -5,8 +5,8 @@ from libnum import s2n
 
 def generate_AES_key():
     hex_chars = "0123456789abcdef"
-    four_random_chars = "".join(choice(hex_chars) for _ in range(5))
-    key = pad(bytes(four_random_chars, encoding="utf-8"), 16)
+    five_random_chars = "".join(choice(hex_chars) for _ in range(5))
+    key = pad(bytes(five_random_chars, encoding="utf-8"), 16)
     return key
 
 cipher1 = AES.new(generate_AES_key(), mode = AES.MODE_ECB)
@@ -30,8 +30,3 @@ if __name__ == "__main__":
     with open("encrypted.txt", "w") as f:
         f.write(encrypted_text +"\n")
         f.write(encrypted_flag)
-
-"""
-=?)u
-+Cbj
-"""

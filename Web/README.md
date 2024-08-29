@@ -45,4 +45,10 @@ COPY public /usr/share/nginx/html
 
 - quiz app, admin bot can read the notes
 
-4. ssrf1
+4. careless mistake (done)
+
+- figure out token
+
+5. dom clobbering
+
+-
