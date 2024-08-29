@@ -16,16 +16,13 @@ import {
   AlertTitle,
   AlertIcon,
 } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
-const sample_results = [
-  { title: "title1", content: "content1" },
-  { title: "title2", content: "content2" },
-  { title: "title3", content: "content3" },
-];
 const Search = () => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const search = async (e) => {
     e.preventDefault();
@@ -39,7 +36,11 @@ const Search = () => {
       credentials: "include",
     });
     const data = await response.json();
-    setResults(data.results);
+    if (data.results) {
+      setResults(data.results);
+    } else {
+      navigate("/login");
+    }
   };
 
   return (
@@ -105,7 +106,7 @@ const Search = () => {
                     <Text>No results.</Text>
                   ) : (
                     results.map((result, i) => (
-                      <Box key={i} ml={4}>
+                      <Box key={i}>
                         <li style={{ textAlign: "left" }}>
                           <Text fontWeight="bold">{result.title}: </Text>
                           <Text ml={1}>{result.content}</Text>

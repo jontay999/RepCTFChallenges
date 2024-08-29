@@ -12,7 +12,7 @@ import {
   Stack,
 } from "@chakra-ui/react";
 
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { HamburgerIcon, CloseIcon, ArrowForwardIcon } from "@chakra-ui/icons";
 
 const Links = ["Home", "Search"];
@@ -35,9 +35,17 @@ const NavLink = ({ children }) => {
   );
 };
 
-// if I'm being honest, this is a pretty useless file, I'm just leaving this here because I don't want to waste mny work hahhaha
 const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const navigate = useNavigate();
+
+  const logout = () => {
+    // cheeky way of logging out by setting the expiry date in the past
+    document.cookie =
+      "connect.sid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    navigate("/");
+  };
+
   return (
     <>
       <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
@@ -68,8 +76,7 @@ const Header = () => {
               size={"sm"}
               mr={4}
               rightIcon={<ArrowForwardIcon />}
-              as={Link}
-              to="/"
+              onClick={logout}
             >
               Logout
             </Button>

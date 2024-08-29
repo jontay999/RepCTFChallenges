@@ -4,14 +4,13 @@ import {
   Box,
   Heading,
   Text,
-  Button,
   Stack,
   useColorModeValue,
   Flex,
 } from "@chakra-ui/react";
 
 import { SERVER_URL } from "../utils";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CreatePost from "../components/CreatePost";
 const Home = () => {
   const [posts, setPosts] = useState([]);

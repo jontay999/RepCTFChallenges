@@ -14,11 +14,9 @@ app.use(cors({
     credentials: true
 }));
 
-const flag = "REP{FAKE_FLAG}"
-
 app.use(
     session({
-        cookie: { maxAge: 3600000 },
+        cookie: { maxAge: 3600000, httpOnly: false },
         store: new MemoryStore({
             checkPeriod: 3600000, // prune expired entries every 1h
         }),
@@ -30,17 +28,18 @@ app.use(
 
 const users = new Map();
 const posts = new Array();
+
+// Let me insert the flag into the db first :)
+const admin_pass = crypto.randomBytes(8).toString("hex")
+const flag = process.env.flag || "REP{FAKE_FLAG}"
+users.set("admin", sha256(admin_pass));
+posts.push({ user: "admin", title: "SECRET CONTENT", content: flag });
+
+
 const is_invalid = (...args) => {
     return args.some(arg => !arg || typeof arg !== "string");
 };
 const make_error = (error) => ({ success: false, error })
-
-app.use((req, res, next) => {
-    if (req.session.user && users.has(req.session.user)) {
-        req.user = users.get(req.session.user);
-    }
-    next();
-});
 
 app.post("/api/login", (req, res) => {
     let { user, pass } = req.body;
@@ -52,10 +51,10 @@ app.post("/api/login", (req, res) => {
         return res.json(make_error("No user with that username exists"));
     }
 
-    if (users.get(user).pass !== sha256(pass)) {
+    if (users.get(user) !== sha256(pass)) {
         return res.json(make_error("invalid password"));
     }
-    req.user = user;
+    req.session.user = user;
     res.json({ success: true });
 });
 
@@ -70,7 +69,7 @@ app.post("/api/register", (req, res) => {
     }
 
     req.session.user = user;
-    users.set(user, { pass: sha256(pass), posts: [] });
+    users.set(user, sha256(pass));
     res.json({ success: true });
 });
 
@@ -84,17 +83,15 @@ app.post("/api/create", auth, (req, res) => {
     if (is_invalid(title, content)) {
         return res.json(make_error("Missing title or content"))
     }
-    const user = req.user
-    let id = crypto.randomBytes(6).toString("hex");
-    posts.push({ user, id, title, content });
-    req.user.posts.push(id);
+    posts.push({ user: req.session.user, title, content });
     res.json({ success: true });
 });
 
 app.post("/api/posts", auth, (req, res) => {
+    console.log("posts:", posts)
     return res.json({
         success: true,
-        data: posts.filter(post => post.user === req.user)
+        data: posts.filter(post => post.user === req.session.user)
     });
 });
 
@@ -107,11 +104,9 @@ app.get("/api/search/:query", auth, (req, res) => {
     if (matching_posts.length === 0) {
         return res.json({ success: false, results: [] })
     }
-    const results = matching_posts.filter(post => post.user === req.user)
+    const results = matching_posts.filter(post => post.user === req.session.user).map(post => ({ title: post.title, content: post.content }))
     return res.json({ success: true, results });
 });
-
-
 
 
 
