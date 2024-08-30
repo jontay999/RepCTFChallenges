@@ -1,0 +1,1 @@
+# tbh just use gpt
