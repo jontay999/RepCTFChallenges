@@ -1,4 +1,3 @@
-
 from Crypto.Util.number import *
 
 def get_flag():
