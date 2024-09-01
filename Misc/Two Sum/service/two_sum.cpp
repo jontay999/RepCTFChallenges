@@ -5,7 +5,7 @@
 #include <vector>
 using namespace std;
 
-string flag = "REP{FAKE_FLAG}";
+string flag = "REP{wait_they_told_me_that_a_hashmapis_O(1)_c96b99e3bee4e7e924c66baa7cc50f1c}";
 
 // Taken straight from https://leetcode.com/problems/two-sum/solution/
 // C++ Two-pass Hash Table

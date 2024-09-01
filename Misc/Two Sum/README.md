@@ -1,6 +1,20 @@
-```
-REP{wait_they_told_me_that_a_hashmapis_O(1)_c96b99e3bee4e7e924c66baa7cc50f1c}
-```
+# Two Sum
+
+**Author**: jontay999
+
+**Category**: Misc
+
+[Solution](solve/solve.py)
+
+## Description
+
+Hashmap Hashmap Hashmap
+
+## Difficulty
+
+Medium
+
+## Deployment
 
 ```
 docker build -t repctf-misc-1 .
