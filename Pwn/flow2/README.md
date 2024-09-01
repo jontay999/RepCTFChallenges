@@ -1,13 +1,25 @@
+# Flow 2
+
+**Category**: Pwn
+
+[Solution](solve/solve.py)
+
+## Description
+
+No more easy function for you to call!
+
+## Difficulty
+
+Easy
+
+## Deployment
+
+```bash
+# in the service/ directory
+docker build -t repctf-pwn-flow-2 .
+
+docker run -d -p 2002:5000 --name pwn-flow-2 --privileged repctf-pwn-flow-2
+
+# debug
+docker logs pwn-flow-2
 ```
-https://shell-storm.org/shellcode/files/shellcode-841.html
-
-
-gcc -m32 -fno-stack-protector -z execstack -no-pie -o flow2 flow2.c
-
-AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHHIIIIJJJJKKKKLLLLMMMMNNNNOOOOPPPPQQQQRRRRSSSS
-
-# add the -g in order to add the global debug info
-gcc -g -fno-stack-protector -z execstack -no-pie -o flow2 flow2.c
-```
-
-OKAYTHIS WORKS BUT I NEED TO PERMISSIONS THIS ENVIRONMENT BETTER
