@@ -11,6 +11,7 @@ COPY server.js ./
 COPY public/ ./public/
 
 ENV NODE_ENV=production 
+ENV FLAG=REP{p0lluti0n_is_a_pr0bl3m_even_in_c0de}
 RUN chown -R inmate:inmate . && \
 npm ci --omit=dev --ignore-scripts --no-audit --no-fund
 USER inmate

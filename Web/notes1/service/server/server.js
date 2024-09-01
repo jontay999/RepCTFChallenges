@@ -10,7 +10,7 @@ const MemoryStore = require("memorystore")(session)
 app.use(express.static("public"));
 app.use(express.json());
 
-const flag = "REP{FAKE_FLAG}"
+const flag = process.env.FLAG || "REP{FAKE_FLAG}"
 
 app.use(
     session({
