@@ -8,7 +8,7 @@
 
 ## Description
 
-You'll never guess my primes.
+Idk how to come up with descriptions.
 
 ## Difficulty
 
