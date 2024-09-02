@@ -1,14 +1,16 @@
-# Brute 1
+# Is that python?
 
 **Author**: jontay999
 
-**Category**: Crypto
+**Category**: Reverse Engineering
 
 [Solution](solve/solve.py)
 
+<!-- TBD -->
+
 ## Description
 
-When all else fails, brute force prevails.
+This doesn't look like a python file
 
 ## Difficulty
 

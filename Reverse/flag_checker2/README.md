@@ -1,18 +1,20 @@
-# Brute 1
+# Flag Checker 2
 
 **Author**: jontay999
 
-**Category**: Crypto
+**Category**: Reverse Engineering
 
 [Solution](solve/solve.py)
 
+<!-- TBD -->
+
 ## Description
 
-When all else fails, brute force prevails.
+This feels annoying
 
 ## Difficulty
 
-Easy
+Medium
 
 ## Deployment
 

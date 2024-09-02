@@ -1,4 +1,4 @@
-# Brute 1
+# Random stuff
 
 **Author**: jontay999
 
@@ -8,7 +8,7 @@
 
 ## Description
 
-When all else fails, brute force prevails.
+How can you even guess random numbers?
 
 ## Difficulty
 

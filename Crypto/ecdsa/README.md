@@ -1,4 +1,4 @@
-# Brute 1
+# Elliptic Curveball
 
 **Author**: jontay999
 
@@ -8,11 +8,11 @@
 
 ## Description
 
-When all else fails, brute force prevails.
+Surely Bitcoin's encryption is secure right?
 
 ## Difficulty
 
-Easy
+Medium
 
 ## Deployment
 

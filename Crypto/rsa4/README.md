@@ -1,4 +1,4 @@
-# Brute 1
+# Is this RSA
 
 **Author**: jontay999
 
@@ -8,11 +8,11 @@
 
 ## Description
 
-When all else fails, brute force prevails.
+Maybe I need to change my basis of understanding...
 
 ## Difficulty
 
-Easy
+Hard
 
 ## Deployment
 

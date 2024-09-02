@@ -1,4 +1,4 @@
-# Brute 1
+# RSA 1
 
 **Author**: jontay999
 
@@ -8,7 +8,7 @@
 
 ## Description
 
-When all else fails, brute force prevails.
+You'll never guess my primes.
 
 ## Difficulty
 

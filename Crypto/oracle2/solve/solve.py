@@ -31,9 +31,7 @@ count = 0
 while not  more_than_b(pow(f1, e, n)):
     count += 1
     f1 *= 2
-
-print("step 1 counts:", count)
-print("step 2 started")
+    
 ## STEP 2
 # at this point:  B <= test_c <= 2B
 # B / 2 <= test_c / 2 <= B
@@ -48,12 +46,6 @@ for j in trange(1,max_steps+1):
     f2 += (f1 // 2)
     if not more_than_b(pow(f2, e, n)):
         break
-
-
-print("step 2 counts:", count)
-print("step 3 started")
-
-
 
 # this makes the "wrapped" f2 * m < B
 # because by definition f2 * m >= B
