@@ -27,8 +27,6 @@ spec:
   selector:
     app: crypto-oracle-1
   ports:
-    - protocol: TCP
-      name: crypto-oracle-1
-      port: 1337
+    - port: 1337
       targetPort: 1337
       protocol: TCP

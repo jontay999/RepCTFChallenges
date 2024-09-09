@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+    - http:
+        paths:
+          - pathType: Prefix
+            path: /xss1
+            backend:
+              service:
+                name: xss1
+                port:
+                  number: 80
+          - pathType: Prefix
+            path: /careless-mistake
+            backend:
+              service:
+                name: careless-mistake
+                port:
+                  number: 80
