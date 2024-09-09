@@ -10,7 +10,7 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-const FLAG = process.env.flag || "REP{FAKE_FLAG}"
+const FLAG = process.env.FLAG || "REP{FAKE_FLAG}"
 const THE_TRUE_ADMIN = "<<<admin>>>"
 
 // Start the server
