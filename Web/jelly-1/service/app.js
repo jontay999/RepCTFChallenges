@@ -26,7 +26,6 @@ app.post('/validate', (req, res) => {
     let moveHistory = req.body
 
     console.log(stage.jellies)
-    // console.log(stage)
 
     for (let i = 0; i < moveHistory.length; i++) {
         let move = moveHistory[i]

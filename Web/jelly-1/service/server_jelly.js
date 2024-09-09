@@ -1,130 +1,28 @@
-
-const LEVELS = [
+const CHALLENGE_LEVEL = [
     [
-        [
-            "xxxxxxxxxxxxxx",
-            "xxxx x  x xxxx",
-            "xxx  g  b  xxx",
-            "xx   x  x   xx",
-            "xx   b  g   xx",
-            "xxg        bxx",
-            "xxxg      bxxx",
-            "xxxx      xxxx",
-            "xxxxxxxxxxxxxx",
-        ],
-        [
-            {
-                x: 5,
-                y: 4,
-                dir: "up",
-            },
-            {
-                x: 8,
-                y: 4,
-                dir: "up",
-            },
-        ],
+        "xxxxxxxxxxxxxx",
+        "xxxx x  x xxxx",
+        "xxx  g  b  xxx",
+        "xx   x  x   xx",
+        "xx   b  g   xx",
+        "xxg        bxx",
+        "xxxg      bxxx",
+        "xxxx      xxxx",
+        "xxxxxxxxxxxxxx",
     ],
     [
-        [
-            "xxxxxxxxxxxxxx",
-            "x   gr       x",
-            "x   00 1     x",
-            "x    x x xxxxx",
-            "x            x",
-            "x  x  x      x",
-            "x        x  rx",
-            "xx   x     gxx",
-            "x          xxx",
-            "xxxxxxxxxxxxxx",
-        ],
-        [
-            {
-                x: 11,
-                y: 7,
-                dir: "down",
-            },
-            {
-                x: 12,
-                y: 6,
-                dir: "down",
-            },
-        ],
+        {
+            x: 5,
+            y: 4,
+            dir: "up",
+        },
+        {
+            x: 8,
+            y: 4,
+            dir: "up",
+        },
     ],
-    [
-        [
-            "xxxxxxxxxxxxxx",
-            "xx   0001233rx",
-            "xx   0411233xx",
-            "xx   444122xxx",
-            "xx     xxxxxxx",
-            "xr     xxxxxxx",
-            "xx     xxxxxxx",
-            "xx     xxxxxxx",
-            "xx     xxxxxxx",
-            "xxxxxxxxxxxxxx",
-        ],
-        [
-            {
-                x: 1,
-                y: 5,
-                dir: "up",
-            },
-        ],
-    ],
-    [
-        [
-            "xxxxxxxxxxxxxx",
-            "xg0    g1gx  x",
-            "x 3g    1 x  x",
-            "x444    2 x  x",
-            "xg g   ggg   x",
-            "xxx     xxx  x",
-            "xxx     xxx  x",
-            "xxx     xxx  x",
-            "xxx          x",
-            "xxxxxxxxxxxxxx",
-        ],
-        [
-            {
-                x: 1,
-                y: 1,
-                dir: "right",
-            },
-            {
-                x: 3,
-                y: 2,
-                dir: "left",
-            },
-            {
-                x: 1,
-                y: 4,
-                dir: "up",
-            },
-            {
-                x: 3,
-                y: 4,
-                dir: "up",
-            },
-            {
-                x: 8,
-                y: 4,
-                dir: "up",
-            },
-            {
-                x: 7,
-                y: 1,
-                dir: "right",
-            },
-            {
-                x: 9,
-                y: 1,
-                dir: "left",
-            },
-        ],
-    ],
-];
-const CHALLENGE_LEVEL = LEVELS[1]
+]
 
 class Stage {
     constructor(mapData) {
@@ -136,7 +34,6 @@ class Stage {
             this.anchors = mapData[1];
             this.map = mapData[0];
         }
-        console.log(this.map)
         this.loadMap(this.map, this.anchors);
         this.checkForMerges();
     }
@@ -176,7 +73,12 @@ class Stage {
             });
             this.cells.push(cellRow);
         });
-        // this.placeAnchors(anchors);
+        for (let anchor of anchors) {
+            let x = anchor.x;
+            let y = anchor.y;
+            let jelly = this.jellies.find(j => j.x == x && j.y == y)
+            jelly.immovable = true;
+        }
     }
 
     trySlide(jelly, direction) {
@@ -211,6 +113,7 @@ class Stage {
         while (!done) {
             done = true;
             for (const jelly of jellies) {
+                if (jelly === undefined || jelly === null) continue;
                 if (jelly.immovable) {
                     return true;
                 }

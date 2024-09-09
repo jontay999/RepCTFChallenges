@@ -1,3 +1,4 @@
+// Its actually not that important to examine this file, but if you want, go for it :)
 (function () {
   var CELL_SIZE,
     Jelly,
@@ -6,7 +7,6 @@
     Wall,
     i,
     level,
-    levelPicker,
     levels,
     moveToCell,
     option,
@@ -524,24 +524,10 @@
 
     Stage.prototype.checkForCompletion = function () {
       if (this.num_monochromatic_blocks <= this.num_colors) {
-        console.log("Congratulations! Level completed.");
-        console.log("Validating moves")
-        console.log(stage.moveHistory)
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://localhost:3000/validate", true);
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.send(JSON.stringify(stage.moveHistory));
-        xhr.onreadystatechange = function () {
-          if (xhr.readyState == 4 && xhr.status == 200) {
-            res = JSON.parse(xhr.responseText)
-            if (res.success == true) {
-              alert("Congratulations! Level completed.");
-            } else {
-              alert("Incorrect solution.");
-            }
-          }
-        };
+        alert("Congratulations! Level completed. Click on `validate` to submit your answer to the server");
+        return true;
       }
+      return false;
     };
 
     Stage.prototype.doOneMerge = function () {
@@ -671,15 +657,13 @@
       this.cells = [cell];
       this.dom.appendChild(cell.dom);
       this.dom.addEventListener("contextmenu", function (e) {
-        console.log("rightclick", _this)
-        stage.moveHistory.push({dir: 1, x: _this.x, y: _this.y});
-        console.log(stage.moveHistory)
+        if (stage.checkForCompletion()) return;
+        stage.moveHistory.push({ dir: 1, x: _this.x, y: _this.y });
         return stage.trySlide(_this, 1);
       });
       this.dom.addEventListener("click", function (e) {
-        console.log("leftclick", _this)
-        stage.moveHistory.push({dir: -1, x: _this.x, y: _this.y});
-        console.log(stage.moveHistory)
+        if (stage.checkForCompletion()) return;
+        stage.moveHistory.push({ dir: -1, x: _this.x, y: _this.y });
         return stage.trySlide(_this, -1);
       });
       this.dom.addEventListener("touchstart", function (e) {
@@ -735,41 +719,20 @@
     return Jelly;
   })();
 
-  level = parseInt(location.search.substr(1), 10) || 1;
-
-  stage = new Stage(document.getElementById("map"), levels[level - 1]);
-
+  // Let's just stick to 1 level :)
+  stage = new Stage(document.getElementById("map"), levels[0]);
   window.stage = stage;
-
-  levelPicker = document.getElementById("level");
-
-  for (
-    i = 1, _ref = levels.length;
-    1 <= _ref ? i <= _ref : i >= _ref;
-    1 <= _ref ? i++ : i--
-  ) {
-    option = document.createElement("option");
-    option.value = i;
-    option.appendChild(document.createTextNode("Level " + i));
-    levelPicker.appendChild(option);
-  }
-
-  levelPicker.value = level;
-
-  levelPicker.addEventListener("change", function () {
-    return (location.search = "?" + levelPicker.value);
-  });
-
   document.getElementById("reset").addEventListener("click", function () {
     stage.dom.innerHTML = "";
-    return (stage = new Stage(stage.dom, levels[level - 1]));
+    stage.moveHistory = [];
+    return (stage = new Stage(stage.dom, levels[0]));
   });
 
   document.getElementById("validate").addEventListener("click", function () {
     console.log("Validating moves")
     console.log(stage.moveHistory)
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://localhost:3000/validate", true);
+    xhr.open("POST", "/validate", true);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(JSON.stringify(stage.moveHistory));
     xhr.onreadystatechange = function () {
@@ -777,7 +740,7 @@
         res = JSON.parse(xhr.responseText)
         console.log("res", res)
         if (res.success == true) {
-          alert("Congratulations! Level completed.");
+          alert(res.message);
         } else {
           alert("Incorrect solution.");
         }
