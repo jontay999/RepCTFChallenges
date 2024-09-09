@@ -1,0 +1,63 @@
+FLAG:
+REP{GUA_LON_POR_RWA_JER_KUC_GYE_BRU_WAL_SOA_MAR}
+
+
+1_territory
+Guam (https://maps.app.goo.gl/YYeY8dKdwkqbYsdt5)
+- The door label 'Guam Reef Hotel'
+
+
+2_city
+London (https://maps.app.goo.gl/UQmpBgh5uJ79XEjY6)
+- The street sign in the background for 'Lonsdale Road' is in London
+- Red London telephone booth
+
+3_country
+Portugal (https://maps.app.goo.gl/XZZ2HLiR5HLaNGRw9)
+- 'Parque florestal bica da cana' on the map is in Madeira, Portugal. even if you cannot read the smaller text, 'parque florestal' is Portuguese and this is obviously not Brazil
+
+4_country
+Rwanda (https://maps.app.goo.gl/wsxarNbnqk6Ejazy7)
+- The sign 'Ubwiherero Rusange' is Kinyarwandan for 'Public Toilet'. Kinyarwanda is only spoken in Rwanda
+- This street view car is unique to Rwanda
+
+5_city
+Jerusalem (https://maps.app.goo.gl/7k3QLg9yHXyk6YH4A)
+- Hebrew on the toilet sign = israel
+- yellow license plates = israel
+- Google lens church in the background = Jerusalem
+
+6_city
+Kuching (https://maps.app.goo.gl/GZ74N8FoqV2qBNL8A)
+- Google Lens the orang utan on a toilet bowl (TR Stone Enterprise)
+
+
+7_province
+Gyeonggi-do (https://maps.app.goo.gl/iepDGVRjayPUNHKC6)
+- Google Lens the golden poop (Mr Toilet House)
+
+8_city
+Brussels (https://maps.app.goo.gl/Wzx27ipK2wZu5QaZ7)
+- EU plates with red text + Little gutters on the road side = Belgium
+- Dog statue in the background. Google 'Belgium dog statue' and you will find Zinneke Pis.
+
+9_street
+Walnut (https://maps.app.goo.gl/WYoVeT49xV6H7xx28)
+- Horizontal bar for stop light + absence of front license plate = America
+- "wxpn" on awning is a Philadelphia radio station along Walnut Street
+- alternatively, Google Lens the red-and-white 'Locust Point' building and triangulate walnut street from there.
+- alternatively-alternatively, find it the way i did, but searching "dog poop" on r/googlemapsshenanigans (https://www.reddit.com/r/googlemapsshenanigans/comments/rfxxmu/philadelphia_of_course_that_dog_needs_to_change/)
+
+10_municipality
+Soacha (https://maps.app.goo.gl/JHU58bJUQoQDwqVW7)
+- '.co' website on building is Colombian ccTLD
+- yellow license plates in south America is Colombian
+- There are 15 Easy stores in Colombia (https://www.easy.com.co/donde-estamos), in 4 different cities. Check each location on Google Maps one-by-one.
+
+11_town
+Marla (https://maps.app.goo.gl/2sYcww4P1ALbkmpS6)
+- Australian Bollards: White, rectangular, with a red reflector on the front and grey reflector on the back.
+- Reflectors are shorter than average - likely QLD or SA
+- Iconic Stobie utility pole, with rotated 'E' pole top - SA
+- Search 'public toilet' in SA and check each location on Google Maps one-by-one.
+(https://www.plonkit.net/australia)
