@@ -1,31 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: crypto-oracle-2
+  name: oracle2
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: crypto-oracle-2
+      app: oracle2
   template:
     metadata:
       labels:
-        app: crypto-oracle-2
+        app: oracle2
     spec:
       containers:
-        - name: oracle
-          image: keanekwa/repctf:crypto-oracle-2-v2
+        - name: oracle2
+          image: keanekwa/repctf:oracle2
           ports:
             - containerPort: 1337
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: crypto-oracle-2
+  name: oracle2
 spec:
   type: ClusterIP
   selector:
-    app: crypto-oracle-2
+    app: oracle2
   ports:
     - port: 1337
       targetPort: 1337
