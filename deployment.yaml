@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: crypto-oracle-1-deployment
+  name: crypto-oracle-1
 spec:
   replicas: 1
   selector:
@@ -21,7 +21,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: crypto-oracle-2-deployment
+  name: crypto-oracle-2
 spec:
   replicas: 1
   selector:
@@ -45,12 +45,13 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    app: oracle
+    app: crypto-oracle-1
   ports:
     - protocol: TCP
       name: crypto-oracle-1
       port: 1337
       targetPort: 1337
+      protocol: TCP
 ---
 apiVersion: v1
 kind: Service
@@ -59,34 +60,44 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    app: oracle
+    app: crypto-oracle-2
   ports:
     - protocol: TCP
       name: crypto-oracle-2
       port: 1337
       targetPort: 1337
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: repctf-ingress
-  annotations:
-    kubernetes.io/ingress.class: nginx
-spec:
-  rules:
-    - http:
-        paths:
-          - path: /crypto1
-            pathType: Prefix
-            backend:
-              service:
-                name: crypto-oracle-1
-                port:
-                  number: 1337
-          - path: /crypto2
-            pathType: Prefix
-            backend:
-              service:
-                name: crypto-oracle-2
-                port:
-                  number: 1337
+      protocol: TCP
+# # ---
+# # apiVersion: networking.k8s.io/v1
+# # kind: Ingress
+# # metadata:
+# #   name: repctf-ingress
+# #   annotations:
+# #     kubernetes.io/ingress.class: nginx
+# # spec:
+# #   rules:
+# #     - http:
+# #         paths:
+# #           - path: /crypto1
+# #             pathType: Prefix
+# #             backend:
+# #               service:
+# #                 name: crypto-oracle-1
+# #                 port:
+# #                   number: 1337
+# #           - path: /crypto2
+# #             pathType: Prefix
+# #             backend:
+# #               service:
+# #                 name: crypto-oracle-2
+# #                 port:
+# #                   number: 1337
+# ---
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: nginx-tcp-services
+#   namespace: ingress-nginx
+# data:
+#   tcp-services: |
+#     1337: default/service/crypto-oracle-1:1337

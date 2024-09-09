@@ -1184,7 +1184,8 @@ imagePullSecrets: []
 # -- TCP service key-value pairs
 ## Ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/exposing-tcp-udp-services.md
 ##
-tcp: { "1337": "default/repctf-ingress:1337" }
+tcp:
+  1337: default/crypto-oracle-1:1337
 #  "8080": "default/example-tcp-svc:9000"
 
 # -- UDP service key-value pairs
