@@ -2,20 +2,16 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: nginx-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   ingressClassName: nginx
   rules:
     - http:
         paths:
-          - pathType: Prefix
-            path: /xss1
-            backend:
-              service:
-                name: xss1
-                port:
-                  number: 80
-          - pathType: Prefix
-            path: /careless-mistake
+          - pathType: ImplementationSpecific
+            path: /careless-mistake(/|$)(.*)
             backend:
               service:
                 name: careless-mistake
