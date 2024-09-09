@@ -169,7 +169,6 @@ class Stage {
 
     checkForCompletion() {
         if (this.numMonochromaticBlocks <= this.numColors) {
-            console.log("Congratulations! Level completed.");
             return true;
         }
     }

@@ -730,20 +730,17 @@
 
   document.getElementById("validate").addEventListener("click", function () {
     console.log("Validating moves")
-    console.log(stage.moveHistory)
-    var xhr = new XMLHttpRequest();
+    const username = window.prompt("Submit your username for verification")
+    const body = JSON.stringify({ moveHistory: stage.moveHistory, username })
+    const xhr = new XMLHttpRequest();
     xhr.open("POST", "/validate", true);
     xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.send(JSON.stringify(stage.moveHistory));
+    xhr.send(body);
     xhr.onreadystatechange = function () {
       if (xhr.readyState == 4 && xhr.status == 200) {
-        res = JSON.parse(xhr.responseText)
-        console.log("res", res)
-        if (res.success == true) {
-          alert(res.message);
-        } else {
-          alert("Incorrect solution.");
-        }
+        res = xhr.responseText
+        console.log("result", res)
+        alert(res);
       }
     };
   });
