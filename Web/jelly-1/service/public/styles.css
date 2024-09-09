@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<title>jelly no puzzle in html5</title>
-<meta charset=utf-8>
-<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-<style>
 body {
   max-width: 674px;
   margin: 4ex auto;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 h1 {
   font-weight: normal;
@@ -42,10 +35,24 @@ select#level {
   border-spacing: 0;
   background: #ccc;
   background-size: 36px 36px;
-  background-image: -webkit-linear-gradient(-45deg,
-    #ccc 25%, #bbb 25%, #bbb 50%, #ccc 50%, #ccc 75%, #bbb 75%);
-  background-image: linear-gradient(-45deg,
-    #ccc 25%, #bbb 25%, #bbb 50%, #ccc 50%, #ccc 75%, #bbb 75%);
+  background-image: -webkit-linear-gradient(
+    -45deg,
+    #ccc 25%,
+    #bbb 25%,
+    #bbb 50%,
+    #ccc 50%,
+    #ccc 75%,
+    #bbb 75%
+  );
+  background-image: linear-gradient(
+    -45deg,
+    #ccc 25%,
+    #bbb 25%,
+    #bbb 50%,
+    #ccc 50%,
+    #ccc 75%,
+    #bbb 75%
+  );
 }
 #stage table td {
   padding: 0;
@@ -129,15 +136,11 @@ select#level {
 .jellybox {
   position: absolute;
   -webkit-transition:
-    /* sliding animation. */
-    left 200ms,
-    /* falling animation: roughly x^2. */
-    top 200ms cubic-bezier(0.5,0, 1,0.5);
+/* sliding animation. */ left 200ms,
+    /* falling animation: roughly x^2. */ top 200ms cubic-bezier(0.5, 0, 1, 0.5);
   transition:
-    /* sliding animation. */
-    left 200ms,
-    /* falling animation: roughly x^2. */
-    top 200ms cubic-bezier(0.5,0, 1,0.5);
+/* sliding animation. */ left 200ms,
+    /* falling animation: roughly x^2. */ top 200ms cubic-bezier(0.5, 0, 1, 0.5);
 }
 .jelly {
   position: absolute;
@@ -155,43 +158,16 @@ select#level {
   background: hsl(120, 100%, 45%);
   border: solid 1px hsl(120, 100%, 30%);
 }
-.black0, .black1, .black2, .black3, .black4, .black5, .black6, .black7,
-.black8, .black9 {
+.black0,
+.black1,
+.black2,
+.black3,
+.black4,
+.black5,
+.black6,
+.black7,
+.black8,
+.black9 {
   background: hsl(0, 0%, 20%);
   border: solid 1px hsl(0, 0%, 50%);
 }
-
-</style>
-</head>
-<body>
-<h1>jelly</h1>
-
-<p>This is an HTML5 clone
-of <a href='http://qrostar.skr.jp/index.cgi?page=jelly&lang=en'>Jelly
-no Puzzle</a>, an excellent puzzle game that was released for Windows
-only.  The game design and levels are taken directly from that. If you
-can run the Windows version I highly recommend it as it has a lot of
-great extra details.</p>
-
-<div id='stage'>
-<div id='map'></div>
-<select id='level'></select>
-<button id='reset'>Reset</button>
-<button id='validate'>Validate</button>
-</div>
-
-<p>How to play: left and right mouse button moves jellies left and
-  right.  When jellies of the same color touch they merge.
-  Your objective is to unify all jellies of the same color
-  (except black jellies that are present in some levels - 
-   there's no need to unify those).</p>
-
-<p><a href='https://github.com/martine/jelly'>Here's the source</a>.
-  To be implemented:
-  <ol>
-    <li>Beautiful "you win" screen when you win.</li>
-</ol></p>
-
-<script src='jelly.js'></script>
-</body>
-</html>

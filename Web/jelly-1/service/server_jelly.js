@@ -1,148 +1,130 @@
-const express = require('express');
-const path = require('path');
 
-const app = express();
-app.use(express.json());
-
-// Serve static files from the "public" directory
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Serve the index.html file
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-
-// Start the server
-const port = 3000;
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-});
-
-const levels = [
+const LEVELS = [
     [
-      [
-        "xxxxxxxxxxxxxx",
-        "xxxx x  x xxxx",
-        "xxx  g  b  xxx",
-        "xx   x  x   xx",
-        "xx   b  g   xx",
-        "xxg        bxx",
-        "xxxg      bxxx",
-        "xxxx      xxxx",
-        "xxxxxxxxxxxxxx",
-      ],
-      [
-        {
-          x: 5,
-          y: 4,
-          dir: "up",
-        },
-        {
-          x: 8,
-          y: 4,
-          dir: "up",
-        },
-      ],
+        [
+            "xxxxxxxxxxxxxx",
+            "xxxx x  x xxxx",
+            "xxx  g  b  xxx",
+            "xx   x  x   xx",
+            "xx   b  g   xx",
+            "xxg        bxx",
+            "xxxg      bxxx",
+            "xxxx      xxxx",
+            "xxxxxxxxxxxxxx",
+        ],
+        [
+            {
+                x: 5,
+                y: 4,
+                dir: "up",
+            },
+            {
+                x: 8,
+                y: 4,
+                dir: "up",
+            },
+        ],
     ],
     [
-      [
-        "xxxxxxxxxxxxxx",
-        "x   gr       x",
-        "x   00 1     x",
-        "x    x x xxxxx",
-        "x            x",
-        "x  x  x      x",
-        "x        x  rx",
-        "xx   x     gxx",
-        "x          xxx",
-        "xxxxxxxxxxxxxx",
-      ],
-      [
-        {
-          x: 11,
-          y: 7,
-          dir: "down",
-        },
-        {
-          x: 12,
-          y: 6,
-          dir: "down",
-        },
-      ],
+        [
+            "xxxxxxxxxxxxxx",
+            "x   gr       x",
+            "x   00 1     x",
+            "x    x x xxxxx",
+            "x            x",
+            "x  x  x      x",
+            "x        x  rx",
+            "xx   x     gxx",
+            "x          xxx",
+            "xxxxxxxxxxxxxx",
+        ],
+        [
+            {
+                x: 11,
+                y: 7,
+                dir: "down",
+            },
+            {
+                x: 12,
+                y: 6,
+                dir: "down",
+            },
+        ],
     ],
     [
-      [
-        "xxxxxxxxxxxxxx",
-        "xx   0001233rx",
-        "xx   0411233xx",
-        "xx   444122xxx",
-        "xx     xxxxxxx",
-        "xr     xxxxxxx",
-        "xx     xxxxxxx",
-        "xx     xxxxxxx",
-        "xx     xxxxxxx",
-        "xxxxxxxxxxxxxx",
-      ],
-      [
-        {
-          x: 1,
-          y: 5,
-          dir: "up",
-        },
-      ],
+        [
+            "xxxxxxxxxxxxxx",
+            "xx   0001233rx",
+            "xx   0411233xx",
+            "xx   444122xxx",
+            "xx     xxxxxxx",
+            "xr     xxxxxxx",
+            "xx     xxxxxxx",
+            "xx     xxxxxxx",
+            "xx     xxxxxxx",
+            "xxxxxxxxxxxxxx",
+        ],
+        [
+            {
+                x: 1,
+                y: 5,
+                dir: "up",
+            },
+        ],
     ],
     [
-      [
-        "xxxxxxxxxxxxxx",
-        "xg0    g1gx  x",
-        "x 3g    1 x  x",
-        "x444    2 x  x",
-        "xg g   ggg   x",
-        "xxx     xxx  x",
-        "xxx     xxx  x",
-        "xxx     xxx  x",
-        "xxx          x",
-        "xxxxxxxxxxxxxx",
-      ],
-      [
-        {
-          x: 1,
-          y: 1,
-          dir: "right",
-        },
-        {
-          x: 3,
-          y: 2,
-          dir: "left",
-        },
-        {
-          x: 1,
-          y: 4,
-          dir: "up",
-        },
-        {
-          x: 3,
-          y: 4,
-          dir: "up",
-        },
-        {
-          x: 8,
-          y: 4,
-          dir: "up",
-        },
-        {
-          x: 7,
-          y: 1,
-          dir: "right",
-        },
-        {
-          x: 9,
-          y: 1,
-          dir: "left",
-        },
-      ],
+        [
+            "xxxxxxxxxxxxxx",
+            "xg0    g1gx  x",
+            "x 3g    1 x  x",
+            "x444    2 x  x",
+            "xg g   ggg   x",
+            "xxx     xxx  x",
+            "xxx     xxx  x",
+            "xxx     xxx  x",
+            "xxx          x",
+            "xxxxxxxxxxxxxx",
+        ],
+        [
+            {
+                x: 1,
+                y: 1,
+                dir: "right",
+            },
+            {
+                x: 3,
+                y: 2,
+                dir: "left",
+            },
+            {
+                x: 1,
+                y: 4,
+                dir: "up",
+            },
+            {
+                x: 3,
+                y: 4,
+                dir: "up",
+            },
+            {
+                x: 8,
+                y: 4,
+                dir: "up",
+            },
+            {
+                x: 7,
+                y: 1,
+                dir: "right",
+            },
+            {
+                x: 9,
+                y: 1,
+                dir: "left",
+            },
+        ],
     ],
-  ];
+];
+const CHALLENGE_LEVEL = LEVELS[1]
 
 class Stage {
     constructor(mapData) {
@@ -153,7 +135,7 @@ class Stage {
         if (mapData[0] instanceof Array) {
             this.anchors = mapData[1];
             this.map = mapData[0];
-          }
+        }
         console.log(this.map)
         this.loadMap(this.map, this.anchors);
         this.checkForMerges();
@@ -323,7 +305,7 @@ class Stage {
     }
 }
 
-class Wall {}
+class Wall { }
 
 class JellyCell {
     constructor(color) {
@@ -385,38 +367,7 @@ class Jelly {
     }
 }
 
-app.post('/validate', (req, res) => {
-    console.log("===============================")
-    console.log('Received a request to validate a user');
-    console.log(req.body)
-
-    let level = levels[1]
-
-    let stage = new Stage(level);
-
-    let moveHistory = req.body
-
-    console.log(stage.jellies)
-    // console.log(stage)
-
-    for (let i = 0; i < moveHistory.length; i++) {
-        let move = moveHistory[i]
-        let jelly = stage.jellies.find(j => j.x == move.x && j.y == move.y)
-        stage.trySlide(jelly, move.dir)
-    }
-
-    if (stage.checkForCompletion()) {
-        return res.json({
-            message: "Level completed!",
-            success: true
-        })
-    }
-
-    return res.json({
-        message: "Incorrect solution.",
-        success: false
-    })
-    
-});
 
 
+
+module.exports = { Jelly, JellyCell, Wall, Stage, CHALLENGE_LEVEL };
