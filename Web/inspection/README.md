@@ -1,3 +1,21 @@
+# Inspection
+
+**Author**: jontay999
+
+**Category**: Web
+
+[Solution](solve/solve.py)
+
+## Description
+
+I hope you know how to read source code.
+
+## Difficulty
+
+Easy
+
+## Deployment
+
 ```bash
 docker build -t repctf-web-0 .
 # note that nginx by default serves it on port 80

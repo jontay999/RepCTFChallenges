@@ -1,16 +1,15 @@
-FROM python:3
+FROM python:3-slim
 WORKDIR /app
 
-RUN useradd -m chall
-RUN pip install pycryptodome
-RUN apt update
-RUN apt install -y socat
+RUN useradd -m chall \
+&& pip install pycryptodome \
+&& apt update \
+&& apt install -y socat
 
 COPY encrypt.py .
 COPY flag.txt .
 
-RUN chmod +r encrypt.py
-RUN chmod +r flag.txt
+RUN chmod +r encrypt.py && chmod +r flag.txt
 
 USER chall
 

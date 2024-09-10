@@ -10,7 +10,7 @@ I've hidden my flag as a modulus, I'm sure no one will be able to retrieve it.
 
 ## Difficulty
 
-Easy
+Medium
 
 ## Deployment
 

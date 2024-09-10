@@ -1,0 +1,24 @@
+ctf{Lsb_5uBsT1tUt!0N_15_dUcK1n9_!NS3cuR3!}
+
+
+This is a basic LSB substitution audio steganography.
+
+
+The challenge description provides the following clues:
+- LSB 
+- 1 in every 100 bytes
+- Only on channel 2
+- At some point the output will likely be in Duckspeak (https://www.dcode.fr/nak-nak-duckspeak) and must be converted to plaintext.
+
+
+Separate the audio channels.
+On channel 2, extract the LSB of 1 in every 100 bytes. 
+You will get a binary string of 1s and 0s, of total length 4920. That's divisible by 8.
+ASCII characters can also be represented in binary within 8 bits.
+If you convert the binary string to ascii, you get an output in duckspeak.
+Convert duckspeak ciphertext into plaintext and you get your flag.
+
+
+code based on: 
+https://daniellerch.me/stego/intro/lsb-en/
+https://stackoverflow.com/questions/7396849/convert-binary-to-ascii-and-vice-versa

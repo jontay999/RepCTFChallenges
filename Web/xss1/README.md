@@ -1,3 +1,21 @@
+# XSS 1
+
+**Author**: jontay999
+
+**Category**: Web
+
+[Solution](solve/solve.py)
+
+## Description
+
+Whats XSS?
+
+## Difficulty
+
+Easy
+
+## Deployment
+
 ```bash
 docker build -t repctf-web-3 .
 docker run -d -p 3002:3000 --name web-3 repctf-web-3
