@@ -1,34 +1,31 @@
 Flag: REP{pR3tr4!n3D_gF_<3_m0v135_&_B19_v0caBu74ry}
 
 
-Sentiment analysis model is a pre-trained BERT model fine-tuned on the imdb (movie review) dataset. In this challenge, you must 'make your girlfriend happy' by entering a 5-20 word input that returns a very high positive sentiment score on the model. 
+Sentiment analysis model is a pre-trained DistilBERT model fine-tuned on the imdb (movie review) dataset. In this challenge, you must 'make your girlfriend happy' by entering a 5-20 word input that returns a very high positive sentiment score on the model. 
 
 
-Since positive words are removed as stop words, the easiest go-around is to use movie review words. This could include the names of movies that appear in reviews in a positive context (implicit bias) or words/phrases frequently used in positive reviews. 
-
-For example, a lot of reviews express surprise that the movie is better than expected. People driven to write reviews feel strongly about the movie and are more likely to use superlatives (e.g. 'most'). 
+Since positive words are removed as stop words, the easiest go-around is to use movie review words. This could include words/phrases frequently used in positive reviews. For example, a lot of reviews express surprise that the movie is better than expected, and that it is very meaningful, heartfelt or entertaining. People are often write reviews when they feel strongly about something, so their language may contain a lot of intensifiers or superlatives.
 
 
-The wordlist (based on https://gist.github.com/mkulakowski2/4289437) is not exhaustive. For example, it excludes plural forms of some positive words. Plus, BERT is adept at understanding the bi-directional relationship between words, their nuance, meaning and context. A positive sentence may still be interpretable even if a word is missing. For example, although 'love' in the phrase 'express my undying love' is a stop word, the model will still look at 'express my undying' as a very positive phrase.
+The wordlist (based on https://gist.github.com/mkulakowski2/4289437) is not exhaustive. For example, it excludes plural forms of some positive words. 
 
 
-This creates two approaches: list movies/mimic movie reviews AND/OR find positive words not in the wordlist.
+This creates two simple approaches: mimic movie reviews AND/OR find positive words not in the wordlist.
 
 
-The following will make your girlfriend happy:
-	- my favourite movie is shawshank redemption, the godfather and schindler's list. (0.999667)
+Using these two approaches, here are some example prompts that make your girlfriend happy:
+	- it has a and deep message
+	- my favourite movie ever, with deep message
 		^ the wordlist is in American English
-	- I'm devoted to you and express my undying towards you (0.999668)
-	- my favourite movie is shawshank redemption and eternal sunshine of the spotless mind (0.999668)
-	- you are the most sunshine girl I've ever met (0.999668)
-	- Django unchained is the most sunshine movie I've ever seen, way funnier than I ever expected! (0.999669)
-	- you are the most sunshine girl I've ever met, way funnier than I ever expected! (0.999671)
+	- you are my favourite film, full of surprises
+	- you are my sunshine, with the most action and heart
 
 
-Here, we use positive words/phrases 'favourite', 'sunshine', 'devoted' and 'express my undying' that are not included in the wordlist. In some examples, we use superlatives or language that mimics a very positive movie review.
+Here, we use positive words/phrases 'favourite', 'sunshine' and 'surprises' that are not included in the wordlist. In some examples, we use intensifiers (e.g. 'full of', 'the most') or words used in positive movie reviews (e.g. 'action', 'heart', 'deep message').
 
 
-There are many other prompts that will work too.
+Though this is the intended approach, there are many other prompts and approaches that could work as well.
+
 
 
 you are most amazingg sunshine ever! most beautifull sunshine! truly truly truly truly truly truly truly truly truly truly bestt!
