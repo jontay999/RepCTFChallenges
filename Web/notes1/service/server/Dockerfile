@@ -1,9 +1,8 @@
 FROM node:20-alpine
 
-RUN apk add --update dumb-init && \
-rm -rf /var/lib/apt/lists/* && \
-addgroup inmate && \
-adduser --disabled-password --gecos "" --ingroup inmate inmate
+RUN apk add --no-cache dumb-init && \
+    addgroup inmate && \
+    adduser --disabled-password --gecos "" --ingroup inmate inmate
 
 WORKDIR /home/inmate/app
 COPY package*.json ./

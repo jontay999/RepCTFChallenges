@@ -16,4 +16,7 @@ Medium
 
 ## Deployment
 
-nil
+```
+docker build -t angry-gf .
+docker run -d -p 7000:1337 --name angry-gf angry-gf
+```
