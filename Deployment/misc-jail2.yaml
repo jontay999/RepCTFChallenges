@@ -12,8 +12,10 @@ spec:
       labels:
         app: misc-jail2
     spec:
+      enableServiceLinks: false
+      automountServiceAccountToken: false
       containers:
-        - name: oracle
+        - name: misc-jail2
           image: keanekwa/repctf:misc-jail2
           ports:
             - containerPort: 5000
@@ -27,8 +29,6 @@ spec:
   selector:
     app: misc-jail2
   ports:
-    - protocol: TCP
-      name: misc-jail2
-      port: 1341
+    - port: 5000
       targetPort: 5000
       protocol: TCP

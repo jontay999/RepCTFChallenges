@@ -12,9 +12,11 @@ spec:
       labels:
         app: misc-two-sum
     spec:
+      enableServiceLinks: false
+      automountServiceAccountToken: false
       containers:
         - name: oracle
-          image: keanekwa/repctf:misc-jail1
+          image: keanekwa/repctf:misc-two-sum
           ports:
             - containerPort: 5000
 ---
@@ -27,8 +29,6 @@ spec:
   selector:
     app: misc-two-sum
   ports:
-    - protocol: TCP
-      name: misc-two-sum
-      port: 1343
+    - port: 5000
       targetPort: 5000
       protocol: TCP

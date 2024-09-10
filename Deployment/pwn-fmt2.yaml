@@ -12,8 +12,10 @@ spec:
       labels:
         app: pwn-fmt2
     spec:
+      enableServiceLinks: false
+      automountServiceAccountToken: false
       containers:
-        - name: oracle
+        - name: pwn-fmt2
           image: keanekwa/repctf:pwn-fmt2
           ports:
             - containerPort: 5000
@@ -27,8 +29,6 @@ spec:
   selector:
     app: pwn-fmt2
   ports:
-    - protocol: TCP
-      name: pwn-fmt2
-      port: 1348
+    - port: 5000
       targetPort: 5000
       protocol: TCP

@@ -11,9 +11,16 @@ spec:
     - http:
         paths:
           - pathType: ImplementationSpecific
-            path: /careless-mistake(/|$)(.*)
+            path: /web-careless-mistake(/|$)(.*)
             backend:
               service:
-                name: careless-mistake
+                name: web-careless-mistake
+                port:
+                  number: 80
+          - pathType: ImplementationSpecific
+            path: /web-xss1(/|$)(.*)
+            backend:
+              service:
+                name: web-xss1
                 port:
                   number: 80

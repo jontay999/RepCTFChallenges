@@ -12,8 +12,10 @@ spec:
       labels:
         app: pwn-flow2
     spec:
+      enableServiceLinks: false
+      automountServiceAccountToken: false
       containers:
-        - name: oracle
+        - name: pwn-flow2
           image: keanekwa/repctf:pwn-flow2
           ports:
             - containerPort: 5000
@@ -27,8 +29,6 @@ spec:
   selector:
     app: pwn-flow2
   ports:
-    - protocol: TCP
-      name: pwn-flow2
-      port: 1345
+    - port: 5000
       targetPort: 5000
       protocol: TCP

@@ -1,31 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: oracle1
+  name: crypto-oracle1
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: oracle1
+      app: crypto-oracle1
   template:
     metadata:
       labels:
-        app: oracle1
+        app: crypto-oracle1
     spec:
+      enableServiceLinks: false
+      automountServiceAccountToken: false
       containers:
-        - name: oracle1
-          image: keanekwa/repctf:oracle1
+        - name: crypto-oracle1
+          image: keanekwa/repctf:crypto-oracle1
           ports:
             - containerPort: 1337
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: oracle1
+  name: crypto-oracle1
 spec:
   type: ClusterIP
   selector:
-    app: oracle1
+    app: crypto-oracle1
   ports:
     - port: 1337
       targetPort: 1337

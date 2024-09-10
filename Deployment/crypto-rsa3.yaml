@@ -12,8 +12,10 @@ spec:
       labels:
         app: crypto-rsa3
     spec:
+      enableServiceLinks: false
+      automountServiceAccountToken: false
       containers:
-        - name: oracle
+        - name: crypto-rsa3
           image: keanekwa/repctf:crypto-rsa3
           ports:
             - containerPort: 1337
@@ -27,8 +29,6 @@ spec:
   selector:
     app: crypto-rsa3
   ports:
-    - protocol: TCP
-      name: crypto-rsa3
-      port: 1339
+    - port: 1337
       targetPort: 1337
       protocol: TCP
