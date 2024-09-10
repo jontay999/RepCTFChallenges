@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-inspection
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: web-inspection
+  template:
+    metadata:
+      labels:
+        app: web-inspection
+    spec:
+      enableServiceLinks: false
+      automountServiceAccountToken: false
+      containers:
+        - name: web-inspection
+          image: keanekwa/repctf:web-inspection
+          ports:
+            - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-inspection
+spec:
+  type: ClusterIP
+  selector:
+    app: web-inspection
+  ports:
+    - port: 80
+      targetPort: 3000

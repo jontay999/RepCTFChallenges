@@ -24,3 +24,38 @@ spec:
                 name: web-xss1
                 port:
                   number: 80
+          - pathType: ImplementationSpecific
+            path: /web-inspection(/|$)(.*)
+            backend:
+              service:
+                name: web-inspection
+                port:
+                  number: 80
+          - pathType: ImplementationSpecific
+            path: /web-jelly1(/|$)(.*)
+            backend:
+              service:
+                name: web-jelly1
+                port:
+                  number: 80
+          - pathType: ImplementationSpecific
+            path: /web-notes1(/|$)(.*)
+            backend:
+              service:
+                name: web-notes1
+                port:
+                  number: 80
+          - pathType: ImplementationSpecific
+            path: /web-notes2(/|$)(.*)
+            backend:
+              service:
+                name: web-notes2
+                port:
+                  number: 80
+          - pathType: ImplementationSpecific
+            path: /web-sqli1(/|$)(.*)
+            backend:
+              service:
+                name: web-sqli1
+                port:
+                  number: 80

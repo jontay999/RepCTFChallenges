@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-notes1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: web-notes1
+  template:
+    metadata:
+      labels:
+        app: web-notes1
+    spec:
+      enableServiceLinks: false
+      automountServiceAccountToken: false
+      containers:
+        - name: web-notes1
+          image: keanekwa/repctf:web-notes1
+          ports:
+            - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-notes1
+spec:
+  type: ClusterIP
+  selector:
+    app: web-notes1
+  ports:
+    - port: 80
+      targetPort: 3000
