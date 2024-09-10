@@ -19,6 +19,8 @@ spec:
           image: keanekwa/repctf:pwn-flow2
           ports:
             - containerPort: 5000
+          securityContext:
+            privileged: true
 ---
 apiVersion: v1
 kind: Service
