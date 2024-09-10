@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: misc-angry-girlfriend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: misc-angry-girlfriend
+  template:
+    metadata:
+      labels:
+        app: misc-angry-girlfriend
+    spec:
+      enableServiceLinks: false
+      automountServiceAccountToken: false
+      containers:
+        - name: misc-angry-girlfriend
+          image: keanekwa/repctf:misc-angry-girlfriend
+          ports:
+            - containerPort: 1337
+          securityContext:
+            privileged: true
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: misc-angry-girlfriend
+spec:
+  type: ClusterIP
+  selector:
+    app: misc-angry-girlfriend
+  ports:
+    - port: 1337
+      targetPort: 1337
+      protocol: TCP
