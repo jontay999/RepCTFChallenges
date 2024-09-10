@@ -30,3 +30,10 @@ Here, we use positive words/phrases 'favourite', 'sunshine', 'devoted' and 'expr
 
 There are many other prompts that will work too.
 
+
+you are most amazingg sunshine ever! most beautifull sunshine! truly truly truly truly truly truly truly truly truly truly bestt!
+0.9960561990737915
+
+
+truly truly truly truly truly truly truly truly truly truly truly truly truly truly truly truly truly truly truly amazingg!
+0.9960293769836426

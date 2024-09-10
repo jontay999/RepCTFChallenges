@@ -55,7 +55,7 @@ def gf_response():
 
   if predicted_class_id == 0:
     print(f"GF: You're making me angrier...\n\tAnger Level={probabilities[0][0]}")
-  elif Decimal(probabilities[0][1].item()) < Decimal(0.999666):
+  elif Decimal(probabilities[0][1].item()) < Decimal(0.995):
     print(f"GF: That's not good enough!\n\tHappy Level={probabilities[0][1]}")
   else:
     print(flag)
