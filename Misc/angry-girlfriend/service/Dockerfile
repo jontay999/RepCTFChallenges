@@ -1,30 +1,28 @@
-FROM python:3.11-slim-buster
+FROM python:3.11-slim
 
 RUN apt-get update && apt-get install -y \
   xinetd \
   python3-pip \
-  python3-dev \
-  && rm -rf /var/lib/apt/lists/*
-RUN pip install --upgrade pip
-RUN mkdir /ctf
-WORKDIR /ctf
-RUN useradd -M -d /ctf ctf
+  && rm -rf /var/lib/apt/lists/* \
+  && mkdir /ctf
 
-RUN echo "Connection blocked" > /etc/banner_fail
+WORKDIR /ctf
+
+RUN useradd -M -d /ctf ctf \
+&& echo "Connection blocked" > /etc/banner_fail
+
 COPY ctf.xinetd /etc/xinetd.d/ctf
 COPY ./src /ctf/
 
-RUN chown -R ctf:ctf /ctf && chmod -R 770 /ctf
-RUN pip3 install transformers
-RUN pip3 install torch --index-url https://download.pytorch.org/whl/cu118
-RUN mkdir /ctf/saved-model
-RUN python setup.py
+RUN chown -R ctf:ctf /ctf && chmod -R 770 /ctf \ 
+  && pip3 install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu \
+  && pip3 install --no-cache-dir transformers \
+  && mkdir /ctf/saved-model \
+  && python setup.py \ 
+  && chown -R root:ctf /ctf \
+  && chmod -R 770 /ctf
 
-RUN chown -R root:ctf /ctf && \
-  chmod -R 770 /ctf
 
-
-ENTRYPOINT []
-CMD ["/usr/sbin/xinetd", "-dontfork"]
+ENTRYPOINT ["/usr/sbin/xinetd", "-dontfork"]
 
 EXPOSE 1337
