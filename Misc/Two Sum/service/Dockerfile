@@ -4,7 +4,8 @@ FROM ubuntu:24.04 AS build
 RUN apt-get update && apt-get install -y \
     g++-13 \
     libstdc++6 \
-    && apt-get clean
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # Release stage
 FROM pwn.red/jail
