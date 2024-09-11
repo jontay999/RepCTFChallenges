@@ -49,7 +49,7 @@ void run_two_sum(vector<long long> &numbers)
     Solution::two_sum(numbers, target);
     double time = (double)(clock() - begin) / CLOCKS_PER_SEC;
     cout << "The total time is " << time << "\n";
-    if (time > 2.5)
+    if (time > 2.3)
     {
         cout << "how did you do that? \n";
         cout << flag << "\n";
@@ -85,6 +85,7 @@ int main()
         {
             cout << "Inputs exhausted!\n";
             cout << "Exiting...\n";
+            return 0;
         }
         cin >> choice;
         switch (choice)

