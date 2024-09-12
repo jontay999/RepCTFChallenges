@@ -2,7 +2,10 @@ from pwn import *
 from Crypto.Util.number import *
 from libnum import n2s
 from tqdm import trange
-p = remote("localhost", 1003)
+
+ip = "104.248.97.237"
+# p = remote("localhost", 1003)
+p = remote(ip, 1338)
 
 
 e = 0x10001

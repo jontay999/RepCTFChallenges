@@ -21,7 +21,9 @@ def generateRelatedMessages():
 
 m1,m2 = generateRelatedMessages()
 def collectMultiplesOfModulus():
-    p = remote('localhost', 1001)
+    ip = "104.248.97.237"
+    # p = remote('localhost', 1001)
+    p = remote(ip, 1339)
     p.recvuntil(b'(as integer) :')
     p.sendline(str(m1).encode('utf-8'))
     p.recvuntil(b'(as integer) :')

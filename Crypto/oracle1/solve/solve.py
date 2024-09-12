@@ -1,6 +1,8 @@
 from pwn import *
 from string import printable
-p = remote("localhost", 1002)
+ip = "104.248.97.237"
+# p = remote("localhost", 1002)
+p = remote(ip, 1337)
 
 p.recvuntil(b"crack it if you can: ")
 cipher = p.recvline().strip().decode('utf-8')
