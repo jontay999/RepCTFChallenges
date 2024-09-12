@@ -8,52 +8,71 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - http:
+    - host: careless-mistake.ivan-and-keane-hard.work
+      http:
         paths:
           - pathType: ImplementationSpecific
-            path: /web-careless-mistake(/|$)(.*)
+            path: /
             backend:
               service:
                 name: web-careless-mistake
                 port:
                   number: 80
+    - host: xss1.ivan-and-keane-hard.work
+      http:
+        paths:
           - pathType: ImplementationSpecific
-            path: /web-xss1(/|$)(.*)
+            path: /
             backend:
               service:
                 name: web-xss1
                 port:
                   number: 80
+    - host: inspection.ivan-and-keane-hard.work
+      http:
+        paths:
           - pathType: ImplementationSpecific
-            path: /web-inspection(/|$)(.*)
+            path: /
             backend:
               service:
                 name: web-inspection
                 port:
                   number: 80
+    - host: jelly1.ivan-and-keane-hard.work
+      http:
+        paths:
           - pathType: ImplementationSpecific
-            path: /web-jelly1(/|$)(.*)
+            path: /
             backend:
               service:
                 name: web-jelly1
                 port:
                   number: 80
+    - host: notes1.ivan-and-keane-hard.work
+      http:
+        paths:
           - pathType: ImplementationSpecific
-            path: /web-notes1(/|$)(.*)
+            path: /
             backend:
               service:
                 name: web-notes1
                 port:
                   number: 80
+    - host: notes2.ivan-and-keane-hard.work
+      http:
+        paths:
           - pathType: ImplementationSpecific
-            path: /web-notes2(/|$)(.*)
+            path: /
             backend:
               service:
                 name: web-notes2
                 port:
                   number: 80
+    - host: sqli1.ivan-and-keane-hard.work
+      http:
+        paths:
           - pathType: ImplementationSpecific
-            path: /web-sqli1(/|$)(.*)
+            path: /
             backend:
               service:
                 name: web-sqli1
