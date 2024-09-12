@@ -16,7 +16,7 @@ spec:
       automountServiceAccountToken: false
       containers:
         - name: oracle
-          image: keanekwa/repctf:misc-two-sum
+          image: keanekwa/repctf:misc-two-sum-v2
           ports:
             - containerPort: 5000
           securityContext:

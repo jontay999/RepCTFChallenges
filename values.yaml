@@ -1185,7 +1185,6 @@ imagePullSecrets: []
 ## Ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/exposing-tcp-udp-services.md
 ##
 tcp:
-  1337: default/crypto-oracle1:1337
   1338: default/crypto-oracle2:1337
   1339: default/crypto-rsa3:1337
   1340: default/misc-jail1:5000
@@ -1198,6 +1197,7 @@ tcp:
   1347: default/pwn-fmt1:5000
   1348: default/pwn-fmt2:5000
   1349: default/misc-angry-girlfriend:1337
+  1350: default/crypto-oracle1:1337
 
 # -- UDP service key-value pairs
 ## Ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/exposing-tcp-udp-services.md
