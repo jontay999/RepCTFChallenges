@@ -4,7 +4,8 @@ metadata:
   name: nginx-ingress
   annotations:
     nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   ingressClassName: nginx
   rules:
@@ -12,7 +13,7 @@ spec:
       http:
         paths:
           - pathType: ImplementationSpecific
-            path: /
+            path: /(.*)
             backend:
               service:
                 name: web-careless-mistake
@@ -22,7 +23,7 @@ spec:
       http:
         paths:
           - pathType: ImplementationSpecific
-            path: /
+            path: /(.*)
             backend:
               service:
                 name: web-xss1
@@ -32,7 +33,7 @@ spec:
       http:
         paths:
           - pathType: ImplementationSpecific
-            path: /
+            path: /(.*)
             backend:
               service:
                 name: web-inspection
@@ -42,7 +43,7 @@ spec:
       http:
         paths:
           - pathType: ImplementationSpecific
-            path: /
+            path: /(.*)
             backend:
               service:
                 name: web-jelly1
@@ -52,7 +53,7 @@ spec:
       http:
         paths:
           - pathType: ImplementationSpecific
-            path: /
+            path: /(.*)
             backend:
               service:
                 name: web-notes1
@@ -62,7 +63,7 @@ spec:
       http:
         paths:
           - pathType: ImplementationSpecific
-            path: /
+            path: /(.*)
             backend:
               service:
                 name: web-notes2
@@ -72,7 +73,7 @@ spec:
       http:
         paths:
           - pathType: ImplementationSpecific
-            path: /
+            path: /(.*)
             backend:
               service:
                 name: web-sqli1
