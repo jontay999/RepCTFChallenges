@@ -4,7 +4,7 @@ import hashlib
 import uuid
 
 
-address = "http://localhost:3002/note"
+address = "https://careless-mistake.ivan-and-keane-hard.work/note"
 secret = f"secret-key-{uuid.uuid4}"[:32]
 note_id = 0
 token = hmac.new(
