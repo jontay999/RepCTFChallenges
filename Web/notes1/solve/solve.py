@@ -29,7 +29,7 @@ a = await fetch("http://localhost:8000/api/create", {
   "method": "POST"
 });
 
-a = fetch("http://localhost:8000/api/create", {
+a = await fetch("http://localhost:8000/api/create", {
   "headers": {
     "accept": "*/*",
     "accept-language": "en-GB,en-US;q=0.9,en;q=0.8",
