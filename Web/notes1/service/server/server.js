@@ -51,7 +51,7 @@ app.post("/api/login", (req, res) => {
     if (users.get(user).pass !== sha256(pass)) {
         return res.json(make_error("invalid password"));
     }
-    req.user = user;
+    req.session.user = user;
     res.json({ success: true });
 });
 
@@ -102,7 +102,16 @@ app.get("/api/post/:id", auth, (req, res) => {
     if (!posts.has(id)) {
         return res.json(make_error("No post with that id"))
     }
-    return res.json({ success: true, data: posts.get(id), flag: req.session.user.is_admin ? flag : "sorry only admins get to see the flag" });
+    let flag_text = "sorry only admins get to see the flag"
+    if (req.session.user.is_admin) {
+        console.log("user is admin", req.session.user)
+        flag_text = flag
+        delete Object.prototype.is_admin
+        req.session.user.is_admin = true
+    } else {
+        console.log("user is not admin", req.session.user)
+    }
+    return res.json({ success: true, data: posts.get(id), flag: flag_text });
 });
 
 app.get("*", (req, res) => res.sendFile("index.html", { root: "public" }));
