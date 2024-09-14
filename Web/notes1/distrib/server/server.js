@@ -51,7 +51,7 @@ app.post("/api/login", (req, res) => {
     if (users.get(user).pass !== sha256(pass)) {
         return res.json(make_error("invalid password"));
     }
-    req.user = user;
+    req.session.user = user;
     res.json({ success: true });
 });
 
