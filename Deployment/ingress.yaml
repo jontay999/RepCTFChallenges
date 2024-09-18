@@ -12,7 +12,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: careless-mistake.ivan-and-keane-hard.work
+    - host: intern.ivan-and-keane-hard.work
       http:
         paths:
           - pathType: ImplementationSpecific
@@ -22,7 +22,7 @@ spec:
                 name: web-careless-mistake
                 port:
                   number: 80
-    - host: xss1.ivan-and-keane-hard.work
+    - host: cookie-monsta.ivan-and-keane-hard.work
       http:
         paths:
           - pathType: ImplementationSpecific
@@ -32,7 +32,7 @@ spec:
                 name: web-xss1
                 port:
                   number: 80
-    - host: inspection.ivan-and-keane-hard.work
+    - host: baby.ivan-and-keane-hard.work
       http:
         paths:
           - pathType: ImplementationSpecific
@@ -42,7 +42,7 @@ spec:
                 name: web-inspection
                 port:
                   number: 80
-    - host: jelly1.ivan-and-keane-hard.work
+    - host: jelly.ivan-and-keane-hard.work
       http:
         paths:
           - pathType: ImplementationSpecific
@@ -52,7 +52,7 @@ spec:
                 name: web-jelly1
                 port:
                   number: 80
-    - host: notes1.ivan-and-keane-hard.work
+    - host: notion.ivan-and-keane-hard.work
       http:
         paths:
           - pathType: ImplementationSpecific
@@ -62,7 +62,7 @@ spec:
                 name: web-notes1
                 port:
                   number: 80
-    - host: notes2.ivan-and-keane-hard.work
+    - host: notes.ivan-and-keane-hard.work
       http:
         paths:
           - pathType: ImplementationSpecific
@@ -72,7 +72,7 @@ spec:
                 name: web-notes2
                 port:
                   number: 80
-    - host: sqli1.ivan-and-keane-hard.work
+    - host: jialat.ivan-and-keane-hard.work
       http:
         paths:
           - pathType: ImplementationSpecific
