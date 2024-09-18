@@ -27,7 +27,7 @@ function win(user, computer) {
     userScore_span.innerHTML = userScore;
     CompScore_span.innerHTML = CompScore;
     // Most web vulnerabilities are due to javascript
-    // Here's part3 of the flag: i5_r34d1ng_c0de
+    // Here's part3 of the flag: i5_r34d1ng_c0de_
     Result_p.innerHTML = `${ConvertToWord(user)}${smallUserWord} beats ${ConvertToWord(computer)}${smallCompWord}. You win!`;
     document.getElementById(user).classList.add('green-glow');
     setTimeout(() => document.getElementById(user).classList.remove('green-glow'), 300);
@@ -77,7 +77,7 @@ function main() {
 
 
 
-function run_this_function_to_get_the_flag_part3() {
+function run_this_function_to_get_the_flag_part4() {
     heehee = 'BYUwTiDkDOAEAOBDMAXWBmWB7AZrFosOANogOYBcsAxgCxjo4CuxxAngPpA='
     console.log(LZString.decompressFromBase64(heehee))
 }
