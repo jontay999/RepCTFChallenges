@@ -19,3 +19,16 @@ kk = [
 # eval("ﬀﬄag[0]>'S'or .1.a", )
 # ﬀﬄag[0]>'S'or .1.a
 # ﬀﬄag[0]>'Q'or .1.a
+
+# galf[0]>'}'or(*rr({}),)
+# galf[0]>'S'or(*rr({}),)
+# ),)}{(rr*(ro'}'>]0[flag
+# ),)}{(rr*(ro'u'>]0[flag
+
+# pass
+#  ),)}{(rr*(ro'h'>]0[flag
+
+# fail
+# ),)}{(rr*(ro'~'>]0[flag
+
+# ),)}{(rr*(ro' '>]0[flag
