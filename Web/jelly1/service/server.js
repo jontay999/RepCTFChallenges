@@ -39,7 +39,7 @@ app.post('/validate', (req, res) => {
         if (req.ip === "localhost" && formatted_username === THE_TRUE_ADMIN) {
             res.send(`Congratulations ${formatted_username}! Here's the flag: ${FLAG}`)
         } else {
-            res.send(`Congratulations ${formatted_username}! But I'll only give the flag to ${THE_TRUE_ADMIN} coming from localhost`)
+            res.send(`Congratulations ${formatted_username} from ${req.ip}! But I'll only give the flag to ${THE_TRUE_ADMIN} coming from localhost`)
         }
     } else {
         res.send("Incorrect solution!")
