@@ -16,7 +16,7 @@ spec:
       automountServiceAccountToken: false
       containers:
         - name: web-inspection
-          image: keanekwa/repctf:web-inspection
+          image: keanekwa/repctf:web-inspection-v2
           ports:
             - containerPort: 80
 ---
