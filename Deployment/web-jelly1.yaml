@@ -16,7 +16,7 @@ spec:
       automountServiceAccountToken: false
       containers:
         - name: web-jelly1
-          image: keanekwa/repctf:web-jelly1-v3
+          image: keanekwa/repctf:web-jelly1-v4
           ports:
             - containerPort: 3000
 ---
