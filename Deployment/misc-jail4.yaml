@@ -1,33 +1,36 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web-jelly1
+  name: misc-jail4
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: web-jelly1
+      app: misc-jail4
   template:
     metadata:
       labels:
-        app: web-jelly1
+        app: misc-jail4
     spec:
       enableServiceLinks: false
       automountServiceAccountToken: false
       containers:
-        - name: web-jelly1
-          image: keanekwa/repctf:web-jelly1-v3
+        - name: misc-jail4
+          image: keanekwa/repctf:misc-jail4
           ports:
-            - containerPort: 3000
+            - containerPort: 5000
+          securityContext:
+            privileged: true
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: web-jelly1
+  name: misc-jail4
 spec:
   type: ClusterIP
   selector:
-    app: web-jelly1
+    app: misc-jail4
   ports:
-    - port: 80
-      targetPort: 3000
+    - port: 5000
+      targetPort: 5000
+      protocol: TCP

@@ -1198,6 +1198,7 @@ tcp:
   1348: default/pwn-fmt2:5000
   1349: default/misc-angry-girlfriend:1337
   1350: default/crypto-oracle1:1337
+  1351: default/misc-jail4:5000
 
 # -- UDP service key-value pairs
 ## Ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/exposing-tcp-udp-services.md
