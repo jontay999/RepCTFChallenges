@@ -78,7 +78,7 @@ function main() {
 
 
 function run_this_function_to_get_the_flag_part4() {
-    heehee = 'BYUwTiDkDOAEAOBDMAXWBmWB7AZrFosOANogOYBcsAxgCxjo4CuxxAngPpA='
+    heehee = 'BYUwTiDkDOAEAOBDMAXWAWWB7AZrFosOANogOYBcsAxumAMw4CuxxAngPpA='
     console.log(LZString.decompressFromBase64(heehee))
 }
 
