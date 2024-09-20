@@ -10,8 +10,6 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-const get_ip = (req) => req.headers['x-forwarded-for'] || req.ip
-
 const FLAG = process.env.FLAG || "REP{FAKE_FLAG}"
 const THE_TRUE_ADMIN = "<<<admin>>>"
 
@@ -45,10 +43,10 @@ app.post('/validate', (req, res) => {
     let formatted_username = "<{username}>".replace("{username}", username)
 
     if (stage.checkForCompletion()) {
-        if (get_ip(req) === "localhost" && formatted_username === THE_TRUE_ADMIN) {
+        if (formatted_username === THE_TRUE_ADMIN) {
             res.send(`Congratulations ${formatted_username}! Here's the flag: ${FLAG}`)
         } else {
-            res.send(`Congratulations ${formatted_username} from ${req.ip}! But I'll only give the flag to ${THE_TRUE_ADMIN} coming from localhost`)
+            res.send(`Congratulations ${formatted_username}! But I'll only give the flag to ${THE_TRUE_ADMIN}`)
         }
     } else {
         res.send("Incorrect solution!")
