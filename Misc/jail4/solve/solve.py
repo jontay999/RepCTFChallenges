@@ -16,12 +16,30 @@ kk = [
     'Ꜹ', 'ꜹ', 'Ꜻ', 'ꜻ', 'Ꜽ', 'ꜽ', 
 ]
 
-# eval("ﬀﬄag[0]>'S'or .1.a", )
+"""
+OKAY sorry this is all very messy
+
+this is part 1 solve, if you run both commands, you'll see that the
+__flags__ in float are different, so you can check each character
+"""
 # ﬀﬄag[0]>'S'or .1.a
 # ﬀﬄag[0]>'Q'or .1.a
 
+"""
+This is part 2 solve, i messed up. This is actually solvable because I did not put the second print of "oh i can see again" in a finally block, so any kind of error would prevent the second print from being seen
+
+Instead, the idea behind this solve is to trigger a segfault which immediately terminates the server connection, so even if the print message is in the finally block, it wouldnt print at all
+"""
+
+"""
+This is the payload before being reversed
+"""
 # galf[0]>'}'or(*rr({}),)
 # galf[0]>'S'or(*rr({}),)
+
+"""
+This is the payload after being reversed. Send both commands and see the different output from the server
+"""
 # ),)}{(rr*(ro'}'>]0[flag
 # ),)}{(rr*(ro'u'>]0[flag
 
