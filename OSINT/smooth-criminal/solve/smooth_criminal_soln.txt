@@ -1,65 +1,98 @@
-FLAG: REP{4Nns_833N_H!t_bY_tH3_m4N_1N_tH3_M!Rr0r_8c30cec2db940e}
+LAG: REP{4Nns_833N_H!t_bY_tH3_m4N_1N_tH3_M!Rr0r_8c30cec2db940e}
 
 
-This is an exercise testing several OSINT techniques relating to GAIA, Google dorking, Instagram, internet archives, GitHub and Telegram. We begin with our only clue, and search for the name 'Ann Elizabeth Aryeuokei' on all social media platforms. 
+This is an exercise testing several OSINT techniques relating to GAIA, Google dorking, Instagram, internet archives, WIFI network mapping, GitHub, Linkedin and Telegram. Tools in use: Sherlock, GHunt, Wigle.net, wayback.archive.org.
+
+
+We begin with our only clue, and do a username search for 'ann_e_aryeuokei' using Sherlock (https://github.com/sherlock-project/sherlock). 
 
 
 STEP 1: Ann Elizabeth Aryeuokei on Instagram (@ann_e_aryeuokei)
-- Linktree: password-locked pastebin (https://linktr.ee/annaryeuokei)
-- 1 tagged post from Jeanie Bill
+- Linktree in bio contains password-locked pastebin (https://linktr.ee/annaryeuokei)
+- 1 tagged post from Jeanie Bill leads us to her account
 
 
 STEP 2: Jeanie Bill on Instagram (@magicgeniebill)
-- 1 post about coding a present for Ann, suggests a need to visit GitHub
+- posts and archived stories with a lot of Ann's personal information
+- 1 post about coding a present for Ann, suggests a need to visit GitHub. Several methods:
+	- Search 'magicgeniebill' on github.com
+	- Sherlock
+	- Based on how GitHub URLs work, just append '/magicgeniebill' to the end of 'github.com'
 
 
 STEP 3: Jeanie Bill on GitHub (https://github.com/magicgeniebill)
-- project commit history "delete secrets" with half a flag in the comments: REP{4Nns_833N_H!t_bY_
+- project commit history "create password_maker.py" with half a flag in the comments: REP{4Nns_833N_H!t_bY_
 - run password_maker.py, find relevant personal information to get password.
+	- question #4 regarding jobs suggests to search for Ann's Linkedin
 - Link in bio for telegram channel
 
 
-STEP 4: Telegram channel (https://t.me/+jzNAplltAmtjN2U1)
-- Video message in channel shows MAC address of Ann's Parents' house wifi router, use wigle.net to find its location
-- Channel bio describes having been wiped recently, suggests needing to use waybackmachine to view old bio.
-	- WayBackMachine (https://web.archive.org/web/20240830152006/https://t.me/+jzNAplltAmtjN2U1)
-- There are 2 mentions of Ann's university: 1 picture of a bird and 1 picture of her at graduation. Google Lens the bird ('rock ptarmigan') and together with the Iceland ccTLD in the graduation photo, use google dork to find an Icelandic university that publishes a lot about the bird.
+STEP 4: LinkedIn (www.linkedin.com/in/areyeuokeianne)
+- profile contains current workplace
+- Post: 1 picture of a bird and 1 picture of Ann at graduation with part of her university's URL cropped out. Google Lens the bird ('rock ptarmigan') and together with the Iceland ccTLD in the graduation photo, use google dork to find an Icelandic university that publishes a lot about the bird.
 	- E.g. "rock ptarmigan" university site:.is
 
 
-STEP 5: Find Jeanie Bill's Email 
-- GitHub commit history "remove confidential info" has a clue that you can find Jeanie's email account from her GitHub
+STEP 5: Telegram channel (https://t.me/+jzNAplltAmtjN2U1)
+- Video message in channel shows MAC address (aka BSSID) of Ann's Parents' house wifi router (C0:4A:00:A4:82:9C), use www.wigle.net to find its location
+- Channel bio describes having been deleted but archived recently, suggests needing to find the old bio in an internet archive.
+	- WayBackMachine (https://web.archive.org/web/20240830152006/https://t.me/+jzNAplltAmtjN2U1)
+
+
+STEP 6: Find Jeanie and Ann's Emails 
+- Jeanie's GitHub commit history "delete clue" has a clue that you can find email accounts from GitHub
 - Find email from GitHub (https://www.nymeria.io/blog/how-to-manually-find-email-addresses-for-github-users)
+	- iloveannaryeuokei@gmail.com and annelizabetharyeuokei@gmail.com
 
 
-STEP 6: Jeanie Bill's Google Reviews
-- Find google ID from email 
-1. go to google chats
+STEP 7: Jeanie's Google Calendar
+- Can use a google OSINT tool like GHunt (https://github.com/mxrch/GHunt) or manually type Jeanie's email account into Google Calendar's 'search for people' search bar
+- Find weekly Saturday scheduled meetings at Centaur Peaks between Jeanie and Ann
+
+
+STEP 8: Ann's Google Calendar
+- Same as step 7. Using GHunt here will be much more efficient.
+- Dec 2022: Ann goes on holiday in Europe and the calendar event is shared with a throwaway account she makes for this occasion
+	- europetripdec2022@gmail.com
+- Dec 2022: event reminder to 'leave review' suggests need to look at google reviews.
+
+
+STEP 9: Ann Throwaway's Google Reviews
+There are 2 methods to access this.
+- GHunt
+- Manual
+1. go to google chats (chat.google.com)
 2. new chat -> start typing email address
 3. dev tools --> network --> filter for 'autocomplete'
 4. view latest entry --> response --> copy-paste 21 digit google ID
-	- Google ID: 101593850360299426972
-- Get google maps profile from google ID (https://www.google.com/maps/contrib/<GOOGLE ID>)
+	- Google ID: 106840208602457818049
+5. Get google maps profile from google ID (https://www.google.com/maps/contrib/<GOOGLE ID>)
 
 
-STEP 7: Fill in Password Maker with all the Info:
+STEP 10: Fill in Password Maker with all the Info:
 - Instagram (Jeanie's)
 	- Post: Ann's DOB = 20-04-2000
 	- Story Highlights: Ann's Nationality = Congolese
 	- Story Highlights: Ann's Favorite Holiday = Christmas 
-- GitHub
-	- commit history "remove confidential info": Ann's workplace = Citibank
-	- extract email: Jeanie's email: iloveannaryeuokei@gmail.com
+- LinkedIn
+	- Experience: Ann's workplace = Jackson 7 bank
+	- 2 pictures in Post + Google Dork: Ann's university = University of Akureyri
 - Telegram Channel
-	- 2 picture messages + Google Dork: Ann's university = University of Akureyri
 	- video message + Wigle.net: Ann's parents' city of residence = Nizhnevartovsk
 	- Archived Profile Bio: Ann & Jeanie's city of residence = Auckland
+		- Alternatively, you can get this info from Jeanie's Google Calendar. The 'police interview' event takes place in Auckland
+- GitHub
+	- extract email: Ann's email: annelizabetharyeuokei@gmail.com
+- Google Calendar
+	- Jeanie's Calendar: Ann & Jeanie visit weekly = centaur peaks
+	- Ann's Calendar: Ann's throwaway account = europetrip2022dec@gmail.com
 - Google Reviews
-	- Review of SPAM Museum: Jeanie's allergies = spam
-	- Review of mountain: Ann & Jeanie frequently visit = centaur peaks
-
-Password: 2d32e40d48217efa3d5a17bb97f203fc30f92aa64543d9daba3239642a390f8d
+	- Review of KKH: Ann's allergies = almonds
 
 
-STEP 8: Unlock Pastebin (https://pastebin.com/D8K11tkj)
+Password: ac49bba439a32179014fe9d5d5809cc66fdbc5fc2c935f6d3a654bc427a224b1
+
+
+
+STEP 11: Unlock Pastebin (https://pastebin.com/D8K11tkj)
 - 2nd half of flag: tH3_m4N_1N_tH3_M!Rr0r_8c30cec2db940e}
